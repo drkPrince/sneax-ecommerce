@@ -1,27 +1,35 @@
-import {useEffect} from 'react'
-import Product from './components/Product'
 
-import {listProducts} from './store/actions/productActions'
-import {useDispatch, useSelector} from 'react-redux'
+import Products from './screens/Products'
+import ProductDetails from './screens/ProductDetails'
+import Cart from './screens/Cart'
+
+import {BrowserRouter, Route, Link} from 'react-router-dom'
+
+import {useSelector} from 'react-redux'
 
 const App = () => {
-    const dispatch = useDispatch()
+    const cart = useSelector(state => state.cart)
 
-    const productList = useSelector(state => state.productList)
-
-    const {loading, error, products} = productList
-
-	useEffect(() => {
-		dispatch(listProducts())
-	}, [dispatch])
-
-
-    if(error) return <p>Error</p>
-        
     return (
         <div className="App">
-            <h2>Nile</h2>
-            {products.map(p => <Product product={p} key={p._id} />)}
+            <BrowserRouter>
+                <div>
+                    <Link to='/cart'>Cart: {cart.cart.length}</Link>
+                </div>
+
+                <Route exact path='/'>
+                    <Products />
+                </Route>
+
+                <Route path='/product/:id'>
+                    <ProductDetails />
+                </Route>
+
+                <Route path='/cart/'>
+                    <Cart />
+                </Route>
+                
+            </BrowserRouter>
         </div>
     );
 }
