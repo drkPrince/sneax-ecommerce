@@ -1,9 +1,10 @@
 
 import User from '../models/userModel.js'
+import {generateToken} from '../utils/jwt.js'
 
-export const getCurrentUser = async (req, res) => {
-	const allUsers = await User.find({})
-	res.send(allUsers)
+export const getProfile = async (req, res) => {
+	const theUser = await User.findById(req.user._id).select('-password')
+	res.send(theUser)
 }
 
 export const login = async (req, res) => {
@@ -15,7 +16,7 @@ export const login = async (req, res) => {
 			name: theUser.name,
 			password: theUser.password,
 			isAdmin: theUser.isAdmin,
-			token: null
+			token: generateToken(theUser._id)
 		})	
 	} 
 
@@ -23,3 +24,22 @@ export const login = async (req, res) => {
 		res.status(401).send('Not Authorised. Invalid email or password')
 	}
 }
+
+export const signup = async (req, res) => {
+	const {name, email, password} = req.body
+	const doesExists = await User.findOne({email})
+	if(doesExists) res.status(403).send('User already exists')
+	else{
+		const newbie = await User.create({name, email, password})
+		if(newbie) res.status(201).json({
+			id: newbie._id,
+			name: newbie.name,
+			email:newbie.email,
+			token: generateToken(newbie._id)
+		})
+
+		else res.status(400).send('INVALID')
+
+	}	
+}
+

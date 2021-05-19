@@ -1,14 +1,16 @@
 import express from 'express'
 
+import {protectRoutes} from '../middleware/authMiddleware.js'
+
 const router = express.Router()
 
 //controllers
-import {getCurrentUser, login} from '../controllers/userController.js'
+import {getProfile, login, signup} from '../controllers/userController.js'
 
 
-
-router.route('/').get(getCurrentUser)
 router.route('/login').post(login)
+router.route('/signup').post(signup)
+router.route('/profile').get(protectRoutes, getProfile)
 
 
 

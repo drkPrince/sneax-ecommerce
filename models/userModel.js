@@ -9,10 +9,20 @@ const userSchema = mongoose.Schema({
 }, {timestamps: true})
 
 
+//for comparing passwords
 userSchema.methods.comparePasswords = async function(enteredPassword) {
 	return await bcrypt.compare(enteredPassword, this.password)
 }
 
+
+//Do this before saving new user
+userSchema.pre('save', async function(next) {
+	if(this.isModified('password')){
+		const salt = await bcrypt.genSalt(10)
+		this.password = await bcrypt.hash(this.password, salt)
+	}
+	else next()	
+})
 
 const User = mongoose.model('User', userSchema)
 
