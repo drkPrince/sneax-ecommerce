@@ -1,21 +1,18 @@
 
 
 import express from 'express'
-import Products from '../models/productModel.js'
+
+//controllers
+import {getAllProducts, getProductById} from '../controllers/productController.js'
+
 
 
 const router = express.Router()
 
-router.get('/', async (req, res) => {
-	const allProducts = await Products.find({})
-	res.send(allProducts)
-})
+router.route('/').get(getAllProducts)
 
-router.get('/:id', async (req, res) => {
-	console.log(req.params.id)
-	const theProduct = await Products.findById(req.params.id)
-	res.send(theProduct)
-})
+router.route('/:id').get(getProductById)
+
 
 
 
