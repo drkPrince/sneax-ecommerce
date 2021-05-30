@@ -1,20 +1,16 @@
-import {Link} from 'react-router-dom'
-
+import { Link } from "react-router-dom";
 
 const Product = ({ product }) => {
-    return (
-        <div>
-			<div>
-				<h6>{product._id}</h6>
-			</div>
+	return (
+		<div>
 			<Link to={`/product/${product._id}`}>
-				<h1>{product.name}</h1>
+				<h2>{product.name}</h2>
 			</Link>
 			<div>
-				<h3>{product.brand}</h3>
+				<img width="100px" src={product.imageUrl} alt={product.name} />
 			</div>
 		</div>
-    )
-}
+	);
+};
 
-export default Product
+export default Product;

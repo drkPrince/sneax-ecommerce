@@ -1,14 +1,15 @@
 
 import Products from './screens/Products'
-import {useSelector, useDispatch} from 'react-redux'
-import {BrowserRouter, Route, Link} from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { BrowserRouter, Route, Link } from 'react-router-dom'
 
 import ProductDetails from './screens/ProductDetails'
 import Cart from './screens/Cart'
 import Login from './screens/Login'
 import Signup from './screens/Signup'
 
-import {logout} from './store/actions/userActions'
+import { logout } from './store/actions/userActions'
+
 
 
 const App = () => {
