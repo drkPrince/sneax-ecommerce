@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { bringProductDetails } from "../store/actions/productActions";
 import { addToCart, removeFromCart } from "../store/actions/cartActions";
@@ -8,12 +8,13 @@ import { addToCart, removeFromCart } from "../store/actions/cartActions";
 const ProductDetails = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
+	const [quantity, setQuantity] = useState(1);
 
 	const { productDetails, error, loading } = useSelector(
 		(state) => state.productDetailss
 	);
 	const cart = useSelector((state) => state.cart);
-	const isInCart = cart.cart.find((x) => x.p_id === id);
+	const isInCart = cart.cart.find((x) => x.id === id);
 
 	useEffect(() => {
 		dispatch(bringProductDetails(id));
@@ -21,7 +22,13 @@ const ProductDetails = () => {
 
 	const addItemToCart = () => {
 		dispatch(
-			addToCart({ product_id: id, product_name: productDetails.name })
+			addToCart({
+				id,
+				name: productDetails.name,
+				img: productDetails.imageUrl,
+				price: productDetails.price,
+				quantity,
+			})
 		);
 	};
 
@@ -43,7 +50,18 @@ const ProductDetails = () => {
 			{isInCart ? (
 				<button onClick={removeItemFromCart}>Remove from cart</button>
 			) : (
-				<button onClick={addItemToCart}>Add to cart</button>
+				<div>
+					<select
+						name="qty"
+						value={quantity}
+						onChange={(e) => setQuantity(e.target.value)}
+					>
+						<option value={1}>1</option>
+						<option value={2}>2</option>
+						<option value={3}>3</option>
+					</select>
+					<button onClick={addItemToCart}>Add to cart</button>
+				</div>
 			)}
 		</div>
 	);

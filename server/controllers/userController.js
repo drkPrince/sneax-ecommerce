@@ -6,18 +6,6 @@ export const getProfile = async (req, res) => {
 	res.send(theUser);
 };
 
-export const getUsersCart = async (req, res) => {
-	const theUsersCart = await User.findById(req.user._id).select("cart");
-	res.send(theUsersCart);
-};
-
-export const updateCart = async (req, res) => {
-	const response = await User.findByIdAndUpdate(req.user._id, {
-		cart: req.body.cart,
-	});
-	res.send(response);
-};
-
 export const login = async (req, res) => {
 	const { email, password } = req.body;
 	const theUser = await User.findOne({ email: email });

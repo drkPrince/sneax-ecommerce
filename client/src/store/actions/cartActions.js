@@ -1,10 +1,12 @@
 export const addToCart =
-	({ product_id, product_name }) =>
+	({ id, name, img, price, quantity }) =>
 	async (dispatch) => {
-		// axios.put('/api/user')
-		dispatch({ type: "ADD_TO_CART", product_id, product_name });
+		dispatch({
+			type: "ADD_TO_CART",
+			payload: { id, name, img, price, quantity },
+		});
 	};
 
-export const removeFromCart = (product_id) => async (dispatch) => {
-	dispatch({ type: "REMOVE_FROM_CART", product_id });
+export const removeFromCart = (id) => async (dispatch) => {
+	dispatch({ type: "REMOVE_FROM_CART", payload: { id } });
 };
