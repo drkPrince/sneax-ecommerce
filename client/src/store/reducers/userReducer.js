@@ -9,7 +9,7 @@ export const userReducer = (initialState = null, action) => {
 			localStorage.removeItem("user");
 			localStorage.removeItem("cart");
 			initialState.user = null;
-			window.location.reload();
+			window.location.href = "/";
 			return initialState;
 		}
 

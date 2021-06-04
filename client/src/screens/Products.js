@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import { Grid, GridItem } from "@chakra-ui/react";
 import Product from "../components/Product";
 import { listProducts } from "../store/actions/productActions";
 
@@ -19,9 +19,11 @@ const Products = () => {
 
 	return (
 		<div>
-			{products.map((p) => (
-				<Product product={p} key={p._id} />
-			))}
+			<Grid templateColumns="repeat(4, 1fr)" gap={6} mt="12" mx="3">
+				{products.map((p) => (
+					<Product product={p} key={p._id} />
+				))}
+			</Grid>
 		</div>
 	);
 };

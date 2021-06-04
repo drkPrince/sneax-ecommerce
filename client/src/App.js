@@ -1,68 +1,101 @@
+import Products from "./screens/Products";
+import { useSelector, useDispatch } from "react-redux";
+import { BrowserRouter, Route, Link } from "react-router-dom";
+import { Flex, Text, Icon, Box } from "@chakra-ui/react";
 
-import Products from './screens/Products'
-import { useSelector, useDispatch } from 'react-redux'
-import { BrowserRouter, Route, Link } from 'react-router-dom'
+import ProductDetails from "./screens/ProductDetails";
+import Cart from "./screens/Cart";
+import Login from "./screens/Login";
+import Signup from "./screens/Signup";
+import Payment from "./screens/Payment";
+import Orders from "./screens/Orders";
 
-import ProductDetails from './screens/ProductDetails'
-import Cart from './screens/Cart'
-import Login from './screens/Login'
-import Signup from './screens/Signup'
-
-import { logout } from './store/actions/userActions'
-
-
+import { logout } from "./store/actions/userActions";
 
 const App = () => {
-    const cart = useSelector(state => state.cart)
-    const user = useSelector(state => state.user)
+    const cart = useSelector((state) => state.cart);
+    const user = useSelector((state) => state.user);
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const logoutUser = () => {
-        dispatch(logout())
-    }
+        dispatch(logout());
+    };
 
     return (
         <div className="App">
             <BrowserRouter>
                 <nav>
-                    {user ? 
-                        <div>
-                            {user && <h4>{user.name}</h4>}
-                            <button onClick={logoutUser}>Logout</button>
-                        </div>
-                        :
-                        <div>
-                            <Link to='/login'>Login</Link>
-                            <Link to='/signup'>Signup</Link>
-                        </div>
-                    }
-                    <Link to='/cart'>Cart: {cart.cart.length}</Link>
+                    <Text fontWeight="600">Sneax 👟</Text>
+                    <Flex>
+                        {user ? (
+                            <div className="nav-item">
+                                {user && <h4>{user.name}</h4>}
+                                <button onClick={logoutUser}>Logout</button>
+                                <Link to="/orders">Your orders</Link>
+                            </div>
+                        ) : (
+                            <div className="nav-item">
+                                <Link to="/login">Login</Link>
+                                <Link to="/signup">Signup</Link>
+                            </div>
+                        )}
+
+                        <Box position="relative">
+                            <Link to="/cart">
+                                <span className="cart-no">
+                                    {cart.cartItems.length}
+                                </span>
+                                <svg
+                                    className="cart-icon"
+                                    width="30px"
+                                    fill="none"
+                                    stroke="#444"
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                                    />
+                                </svg>
+                            </Link>
+                        </Box>
+                    </Flex>
                 </nav>
 
-                <Route exact path='/'>
+                <Route exact path="/">
                     <Products />
                 </Route>
 
-                <Route path='/product/:id'>
+                <Route path="/product/:id">
                     <ProductDetails />
                 </Route>
 
-                <Route path='/cart'>
+                <Route path="/cart">
                     <Cart />
                 </Route>
 
-                <Route path='/login'>
+                <Route path="/login">
                     <Login />
                 </Route>
 
-                <Route path='/signup'>
+                <Route path="/signup">
                     <Signup />
                 </Route>
-                
+
+                <Route path="/payment">
+                    <Payment />
+                </Route>
+
+                <Route path="/orders">
+                    <Orders />
+                </Route>
             </BrowserRouter>
         </div>
     );
-}
+};
 
 export default App;

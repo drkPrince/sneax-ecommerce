@@ -1,19 +1,11 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
-const addressSchema = mongoose.Schema({
-	address: { type: String, required: true },
-	district: { type: String, required: true },
-	state: { type: String, required: true },
-	PIN: { type: Number, required: true },
-});
-
 const userSchema = mongoose.Schema(
 	{
 		name: { type: String, required: true },
 		email: { type: String, required: true, unique: true },
 		password: { type: String, required: true },
-		addresses: [addressSchema],
 	},
 	{ timestamps: true }
 );
