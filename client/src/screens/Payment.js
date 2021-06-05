@@ -1,6 +1,17 @@
 import { useSelector, useDispatch } from "react-redux";
 import { addAddress, createOrder } from "../store/actions/cartActions";
 import { useState } from "react";
+import {
+	Flex,
+	Box,
+	Input,
+	Text,
+	Stack,
+	Button,
+	FormLabel,
+	Radio,
+	RadioGroup,
+} from "@chakra-ui/react";
 import { calculateTotal } from "../utils";
 
 const Payment = () => {
@@ -37,32 +48,39 @@ const Payment = () => {
 	};
 
 	return (
-		<div>
-			<h3>Address and Payment</h3>
+		<Box p="8">
 			<div>
-				<h5>Saved addresses</h5>
+				<Text fontSize="2xl">Select Address</Text>
+
 				{addresses.map((x, i) => (
-					<div key={i} onClick={(e) => setAddress(x)}>
+					<Box
+						bg={x.address === address.address ? "purple.200" : "white"}
+						my="3"
+						key={i}
+						onClick={(e) => setAddress(x)}
+					>
 						<p>
 							{x.address} in {x.country}
 						</p>
-					</div>
+					</Box>
 				))}
 			</div>
 			<form onSubmit={handleSubmit}>
-				<input name="address" type="text" placeholder="address" />
-				<input type="text" placeholder="district" name="district" />
-				<input type="text" placeholder="state" name="state" />
-				<input
-					type="text"
-					placeholder="postal code"
-					name="postalCode"
-				/>
-				<input type="text" placeholder="country" name="country" />
-				<button type="submit">Add address</button>
+				<Stack spacing="12px" my="12">
+					<Input name="address" type="text" placeholder="Address" />
+					<Input type="text" placeholder="District" name="district" />
+					<Input type="text" placeholder="State" name="state" />
+					<Input type="text" placeholder="Postal code" name="postalCode" />
+					<Input type="text" placeholder="Country" name="country" />
+				</Stack>
+				<Button w="12rem" colorScheme="green" type="submit" mt="2">
+					Add address
+				</Button>
 			</form>
-			<button onClick={order}>Order</button>
-		</div>
+			<Button colorScheme="purple" onClick={order}>
+				Order
+			</Button>
+		</Box>
 	);
 };
 

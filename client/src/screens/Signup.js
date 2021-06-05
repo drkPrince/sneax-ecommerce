@@ -35,9 +35,12 @@ const Signup = () => {
 	};
 
 	return (
-		<div>
+		<Box pt="12">
 			<form onSubmit={signUpUser}>
 				<VStack spacing="20px">
+					<Text my="3" textColor="gray.600" fontSize="3xl">
+						Create a new account
+					</Text>
 					<Box>
 						<FormLabel htmlFor="name">Name</FormLabel>
 						<Input isRequired name="name" type="text" />
@@ -55,7 +58,7 @@ const Signup = () => {
 					</Button>
 				</VStack>
 			</form>
-		</div>
+		</Box>
 	);
 };
 

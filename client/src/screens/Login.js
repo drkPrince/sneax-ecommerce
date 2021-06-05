@@ -39,7 +39,7 @@ const Login = () => {
 	return (
 		<Flex justifyContent="center" alignItems="center" pt="12">
 			<form onSubmit={loginUser} w="50%">
-				<VStack spacing="30px">
+				<VStack spacing="20px">
 					<Text my="3" textColor="gray.600" fontSize="3xl">
 						Log in to your account
 					</Text>

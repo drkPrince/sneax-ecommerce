@@ -27,9 +27,6 @@ const Cart = () => {
 	return (
 		<Flex px="8" pt="16">
 			<Box w="70vw" pr="28">
-				<Text fontSize="4xl" textColor="gray.600">
-					Bag
-				</Text>
 				{cart.cartItems.map((x) => (
 					<Flex
 						key={x.id}
@@ -49,15 +46,20 @@ const Cart = () => {
 									<Link to={`/product/${x.id}`}>{x.name}</Link>
 								</Text>
 								<Flex my="3">
-									<Text textColor="gray.500">Price</Text>
-									<Text mx="3" fontSize="md" textColor="purple.900">
-										{x.price}.00
+									<Text textColor="gray.500">Subtotal</Text>
+									<Text
+										mx="3"
+										fontSize="md"
+										textColor="purple.800"
+										fontWeight="600"
+									>
+										{x.price * x.quantity}.00
 									</Text>
 								</Flex>
 								<Flex my="3">
-									<Text textColor="gray.500">Subtotal</Text>
-									<Text mx="3" fontSize="md" textColor="purple.700">
-										{x.price * x.quantity}.00
+									<Text textColor="gray.500">Price</Text>
+									<Text mx="3" fontSize="md" textColor="purple.600">
+										{x.price}.00
 									</Text>
 								</Flex>
 								<Flex alignItems="center" my="3">
@@ -104,9 +106,6 @@ const Cart = () => {
 				))}
 			</Box>
 			<Box w="30vw">
-				<Text fontSize="4xl" textColor="gray.600">
-					Summary
-				</Text>
 				<Flex my="3" justifyContent="space-between" textColor="gray.700">
 					<Text>Total amount</Text>
 					<Text>{calculateTotal(cart.cartItems)}</Text>
@@ -124,7 +123,7 @@ const Cart = () => {
 				<hr />
 				<Flex
 					justifyContent="space-between"
-					fontSize="2xl"
+					fontSize="xl"
 					textColor="gray.900"
 					my="3"
 				>
@@ -132,7 +131,7 @@ const Cart = () => {
 					<Box>${calculateTotal(cart.cartItems) + 1.25}</Box>
 				</Flex>
 				<hr />
-				<Button colorScheme="purple" onClick={handleClick} w="100%" mt="12">
+				<Button colorScheme="purple" onClick={handleClick} w="100%" mt="8">
 					Checkout
 				</Button>
 			</Box>

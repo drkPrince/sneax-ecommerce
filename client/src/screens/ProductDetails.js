@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import {
@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 
 import { bringProductDetails } from "../store/actions/productActions";
-import { addToCart, removeFromCart } from "../store/actions/cartActions";
+import { addToCart } from "../store/actions/cartActions";
 
 const ProductDetails = () => {
 	const { id } = useParams();
@@ -43,10 +43,6 @@ const ProductDetails = () => {
 				quantity,
 			})
 		);
-	};
-
-	const removeItemFromCart = () => {
-		dispatch(removeFromCart(id));
 	};
 
 	if (error) return <p>Error</p>;
@@ -119,30 +115,59 @@ const ProductDetails = () => {
 					</Box>
 
 					{isInCart ? (
-						<Button
-							colorScheme="red"
-							variant="outline"
-							onClick={removeItemFromCart}
-						>
-							Remove from cart
+						<Button colorScheme="cyan" variant="link" mt="8">
+							<Link to="/cart">Go to cart</Link>
 						</Button>
 					) : (
-						<Box display="flex">
-							<Select
-								w="4rem"
-								mr="2"
-								variant="filled"
-								name="qty"
-								value={quantity}
-								onChange={(e) => setQuantity(e.target.value)}
+						<Box mt="3">
+							<Flex>
+								<Box mr="5">
+									<FormLabel htmlFor="qty" fontWeight="600">
+										Quantity
+									</FormLabel>
+									<Select
+										w="4rem"
+										mr="2"
+										variant="filled"
+										size="sm"
+										name="qty"
+										value={quantity}
+										onChange={(e) => setQuantity(e.target.value)}
+									>
+										<option value={1}>1</option>
+										<option value={2}>2</option>
+										<option value={3}>3</option>
+										<option value={4}>4</option>
+										<option value={5}>5</option>
+									</Select>
+								</Box>
+								<Box>
+									<FormLabel htmlFor="size" fontWeight="600">
+										Size
+									</FormLabel>
+									<Select
+										w="4rem"
+										mr="2"
+										variant="filled"
+										size="sm"
+										name="size"
+										value={selectedSize}
+										onChange={(e) => setSelectedSize(e.target.value)}
+									>
+										<option value={5}>5</option>
+										<option value={6}>6</option>
+										<option value={7}>7</option>
+										<option value={8}>8</option>
+										<option value={9}>9</option>
+									</Select>
+								</Box>
+							</Flex>
+							<Button
+								colorScheme="purple"
+								onClick={addItemToCart}
+								w="100%"
+								mt="12"
 							>
-								<option value={1}>1</option>
-								<option value={2}>2</option>
-								<option value={3}>3</option>
-								<option value={4}>4</option>
-								<option value={5}>5</option>
-							</Select>
-							<Button colorScheme="purple" onClick={addItemToCart}>
 								Add to cart
 							</Button>
 						</Box>
