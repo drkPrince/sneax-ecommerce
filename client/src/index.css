@@ -21,10 +21,14 @@ body {
 	top: -3px;
 }
 
+input[type="radio"] {
+	appearance: none;
+}
+
 nav {
 	display: flex;
 	justify-content: space-between;
-	margin: 1rem 2rem;
+	padding: 1.7rem 2rem;
 }
 
 nav > * {

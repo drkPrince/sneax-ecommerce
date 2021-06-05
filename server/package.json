@@ -4,13 +4,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "server": "nodemon server/server.js",
-    "client": "cd client && yarn start",
-    "dev": "concurrently \"yarn server\" \"yarn client\"",
-    "seed": "node seed",
-    "data:destroy": "node seed -d"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",

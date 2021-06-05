@@ -19,7 +19,7 @@ const Products = () => {
 
 	return (
 		<div>
-			<Grid templateColumns="repeat(4, 1fr)" gap={6} mt="12" mx="3">
+			<Grid templateColumns="repeat(5, 1fr)" gap={6} py="12" mx="8">
 				{products.map((p) => (
 					<Product product={p} key={p._id} />
 				))}

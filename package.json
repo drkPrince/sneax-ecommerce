@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "cd server && nodemon server/server.js",
+    "server": "cd server && nodemon server.js",
     "client": "cd client && yarn start",
-    "dev": "cd server && concurrently \"yarn server\" \"yarn client\"",
+    "dev": "concurrently \"yarn server\" \"yarn client\"",
     "seed": "cd server && node seed",
     "data:destroy": "cd server && node seed -d"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^6.2.0"
+  }
 }

@@ -10,6 +10,7 @@ import {
 	Select,
 	Image,
 	Badge,
+	FormLabel,
 } from "@chakra-ui/react";
 
 import { bringProductDetails } from "../store/actions/productActions";
@@ -19,6 +20,7 @@ const ProductDetails = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
 	const [quantity, setQuantity] = useState(1);
+	const [selectedSize, setSelectedSize] = useState(7);
 
 	const { productDetails, error, loading } = useSelector(
 		(state) => state.productDetailss
@@ -37,6 +39,7 @@ const ProductDetails = () => {
 				name: productDetails.name,
 				img: productDetails.imageUrl,
 				price: productDetails.price,
+				size: selectedSize,
 				quantity,
 			})
 		);
@@ -80,28 +83,51 @@ const ProductDetails = () => {
 							Free Delivery
 						</Badge>
 					</Text>
-					<Text textColor="gray.500">
-						For {productDetails?.category}
-					</Text>
-					<Text
-						mt="5"
-						textColor="gray.700"
-						lineHeight="tall"
-						fontSize="lg"
-					>
+
+					<Text mt="3" textColor="gray.700" lineHeight="tall" fontSize="md">
 						{productDetails?.description}
 					</Text>
+					<Box mt="4" fontWeight="600" hidden>
+						<Text>Select Size:</Text>
+						<Flex justifyContent="start" mt="2">
+							{[5, 6, 7, 8, 9, 10, 11].map((x) => (
+								<Box>
+									<FormLabel
+										htmlFor={x}
+										display="flex"
+										justifyContent="center"
+										alignItems="center"
+										borderRadius="600px"
+										w="9"
+										h="9"
+										textColor={selectedSize === x ? "white" : "gray.700"}
+										bg={selectedSize === x ? "gray.500" : "white"}
+									>
+										<div>{x}</div>
+									</FormLabel>
+									<input
+										onChange={(e) => setSelectedSize(Number(e.target.value))}
+										id={x}
+										type="radio"
+										name="size"
+										value={x}
+										required
+									/>
+								</Box>
+							))}
+						</Flex>
+					</Box>
+
 					{isInCart ? (
 						<Button
 							colorScheme="red"
-							mt="12"
 							variant="outline"
 							onClick={removeItemFromCart}
 						>
 							Remove from cart
 						</Button>
 					) : (
-						<Box mt="12" display="flex">
+						<Box display="flex">
 							<Select
 								w="4rem"
 								mr="2"
@@ -116,10 +142,7 @@ const ProductDetails = () => {
 								<option value={4}>4</option>
 								<option value={5}>5</option>
 							</Select>
-							<Button
-								colorScheme="orange"
-								onClick={addItemToCart}
-							>
+							<Button colorScheme="purple" onClick={addItemToCart}>
 								Add to cart
 							</Button>
 						</Box>
