@@ -53,11 +53,11 @@ const Cart = () => {
 										textColor="purple.800"
 										fontWeight="600"
 									>
-										{x.price * x.quantity}.00
+										${x.price * x.quantity}.00
 									</Text>
 								</Flex>
 								<Flex my="3">
-									<Text textColor="gray.500">Price</Text>
+									<Text textColor="gray.500">Unit Price</Text>
 									<Text mx="3" fontSize="md" textColor="purple.600">
 										{x.price}.00
 									</Text>
@@ -121,14 +121,10 @@ const Cart = () => {
 					<Text>1.25</Text>
 				</Flex>
 				<hr />
-				<Flex
-					justifyContent="space-between"
-					fontSize="xl"
-					textColor="gray.900"
-					my="3"
-				>
+				<Flex justifyContent="space-between" textColor="gray.900" my="3">
 					<Box>Grand Total</Box>
-					<Box>${calculateTotal(cart.cartItems) + 1.25}</Box>
+
+					<Box fontWeight="600">${calculateTotal(cart.cartItems) + 1.25}</Box>
 				</Flex>
 				<hr />
 				<Button colorScheme="purple" onClick={handleClick} w="100%" mt="8">

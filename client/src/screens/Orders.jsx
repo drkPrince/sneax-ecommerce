@@ -32,7 +32,7 @@ const Orders = () => {
 	return (
 		<Box pl="8" pr="16" py="12">
 			<Text textColor="gray.600" fontSize="2xl" mb="6">
-				All Orders
+				Your Orders
 			</Text>
 			<Stack divider={<StackDivider borderColor="gray.200" />}>
 				{orders.map((x) => (
@@ -60,7 +60,7 @@ const Orders = () => {
 
 							<Box>
 								<Text textColor="purple.500" fontSize="sm">
-									Order on
+									Ordered on
 								</Text>
 								<Text textColor="gray.800">
 									{new Date(x.createdAt).toDateString()}

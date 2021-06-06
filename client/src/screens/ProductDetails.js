@@ -70,17 +70,23 @@ const ProductDetails = () => {
 					<Text fontSize="4xl" textColor="gray.700">
 						{productDetails?.name}
 					</Text>
-					<Text fontWeight="600" fontSize="2xl" my="2">
+					<Text fontWeight="600" fontSize="2xl" mb="4">
 						<Text fontSize="sm" as="sup">
 							$
 						</Text>
 						{productDetails?.price}
-						<Badge ml="2" colorScheme="green" variant="subtle">
-							Free Delivery
+						<Badge ml="2" colorScheme="cyan" variant="subtle">
+							{productDetails?.type}
 						</Badge>
 					</Text>
 
-					<Text mt="3" textColor="gray.700" lineHeight="tall" fontSize="md">
+					<Text
+						mt="3"
+						mb="5"
+						textColor="gray.700"
+						lineHeight="tall"
+						fontSize="md"
+					>
 						{productDetails?.description}
 					</Text>
 					<Box mt="4" fontWeight="600" hidden>
@@ -115,8 +121,27 @@ const ProductDetails = () => {
 					</Box>
 
 					{isInCart ? (
-						<Button colorScheme="cyan" variant="link" mt="8">
-							<Link to="/cart">Go to cart</Link>
+						<Button colorScheme="cyan" variant="link" mt="5" size="lg">
+							<Link to="/cart">
+								<Flex alignItems="center">
+									Go to cart
+									<svg
+										fill="none"
+										width="0.9rem"
+										height="0.9rem"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											strokeWidth={2}
+											d="M14 5l7 7m0 0l-7 7m7-7H3"
+										/>
+									</svg>
+								</Flex>
+							</Link>
 						</Button>
 					) : (
 						<Box mt="3">

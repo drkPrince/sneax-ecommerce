@@ -3,7 +3,7 @@ import { Text, Flex } from "@chakra-ui/react";
 
 const Product = ({ product }) => {
 	return (
-		<Link to={`/product/${product._id}`}>
+		<Link className="product" to={`/product/${product._id}`}>
 			<div>
 				<img width="100%" src={product.imageUrl} alt={product.name} />
 			</div>
