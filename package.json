@@ -7,8 +7,7 @@
     "server": "cd server && nodemon server.js",
     "client": "cd client && yarn start",
     "dev": "concurrently \"yarn server\" \"yarn client\"",
-    "seed": "cd server && node seed",
-    "data:destroy": "cd server && node seed -d"
+    "seed": "cd server && node seed1"
   },
   "keywords": [],
   "author": "",

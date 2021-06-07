@@ -1,7 +1,9 @@
 import Products from "../models/productModel.js";
 
 export const getAllProducts = async (req, res) => {
-	const allProducts = await Products.find({}).limit(20);
+	const allProducts = await Products.find({})
+		.limit(20)
+		.select("_id name type category imageUrl price");
 	res.send(allProducts);
 };
 

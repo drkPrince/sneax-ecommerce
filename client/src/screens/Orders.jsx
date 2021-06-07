@@ -54,7 +54,7 @@ const Orders = () => {
 								<Text textColor="gray.800">
 									{Object.entries(x.shippingAddress)
 										.map((x) => x[1])
-										.join(" ")}
+										.join(", ")}
 								</Text>
 							</Box>
 

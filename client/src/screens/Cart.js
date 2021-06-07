@@ -24,6 +24,14 @@ const Cart = () => {
 		else history.push("/login");
 	}
 
+	if (cart.cartItems.length === 0) {
+		return (
+			<Box px="8" pt="16">
+				Cart is Empty
+			</Box>
+		);
+	}
+
 	return (
 		<Flex px="8" pt="16">
 			<Box w="70vw" pr="28">
@@ -43,7 +51,9 @@ const Cart = () => {
 							</Box>
 							<Box ml="5">
 								<Text fontSize="2xl" fontWeight="400" textColor="gray.800">
-									<Link to={`/product/${x.id}`}>{x.name}</Link>
+									<Link to={`/product/${x.id}`}>
+										{x.name} ({x.size})
+									</Link>
 								</Text>
 								<Flex my="3">
 									<Text textColor="gray.500">Subtotal</Text>

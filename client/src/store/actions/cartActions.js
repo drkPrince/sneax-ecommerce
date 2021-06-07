@@ -1,15 +1,16 @@
 import axios from "axios";
 
 export const addToCart =
-	({ id, name, img, price, quantity }) =>
-	async (dispatch) => {
+	({ id, name, img, price, quantity, size }) =>
+	(dispatch) => {
+		console.log(size);
 		dispatch({
 			type: "ADD_TO_CART",
-			payload: { id, name, img, price, quantity },
+			payload: { id, name, img, price, quantity, size },
 		});
 	};
 
-export const removeFromCart = (id) => async (dispatch) => {
+export const removeFromCart = (id) => (dispatch) => {
 	dispatch({ type: "REMOVE_FROM_CART", payload: { id } });
 };
 
@@ -23,7 +24,6 @@ export const addAddress =
 	};
 
 export const createOrder = (order) => (dispatch, getState) => {
-	console.log("alright");
 	const { user } = getState();
 	const config = {
 		headers: {
@@ -32,4 +32,5 @@ export const createOrder = (order) => (dispatch, getState) => {
 		},
 	};
 	axios.post("/api/order", order, config);
+	dispatch({ type: "CLEAR_CART" });
 };

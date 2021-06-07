@@ -1,5 +1,5 @@
-const Auccess = () => {
+const Success = () => {
 	return <div>Suceess</div>;
 };
 
-export default Auccess;
+export default Success;

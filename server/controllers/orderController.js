@@ -5,21 +5,36 @@ const stripe = new Stripe(
 	"sk_test_51IxqlgSFv3T0wJaK19OU5hneuSXI5hZw83YJvE2SZVf1nyPWpohNRU52H7alUW0AN2Ek14lmvtWGmSQYCyrLh9wC009d9D1Xo2"
 );
 
-export const createOrder = async (req, res) => {
-	const paymentIntent = await stripe.paymentIntents.create({
-		amount: req.body.totalPrice,
-		currency: "inr",
+export const createCheckoutSession = async (req, res) => {
+	const session = await stripe.checkout.sessions.create({
 		payment_method_types: ["card"],
-		receipt_email: "imprincinho@gmail.com",
+		line_items: [
+			{
+				price_data: {
+					currency: "usd",
+					product_data: {
+						name: "Nike Shoe(s)",
+					},
+					unit_amount: req.body.price * 100,
+				},
+				quantity: 1,
+			},
+		],
+		mode: "payment",
+		success_url: "https://localhost:3000/success",
+		cancel_url: "https://localhost:3000/cancel",
 	});
-	console.log("paymentIntent", paymentIntent);
-	res.send(paymentIntent);
-	// try {
-	// 	const newOrder = await Order.create(req.body);
-	// 	res.send(newOrder);
-	// } catch (e) {
-	// 	res.send(e);
-	// }
+
+	res.json({ id: session.id });
+};
+
+export const createOrder = async (req, res) => {
+	try {
+		const newOrder = await Order.create(req.body);
+		res.send(newOrder);
+	} catch (e) {
+		res.send(e);
+	}
 };
 
 export const getUsersOrders = async (req, res) => {

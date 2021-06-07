@@ -1,6 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
 import { addAddress, createOrder } from "../store/actions/cartActions";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import StripeCheckout from "react-stripe-checkout";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 import {
 	Flex,
 	Box,
@@ -13,19 +16,35 @@ import {
 	RadioGroup,
 } from "@chakra-ui/react";
 import { calculateTotal } from "../utils";
-import { loadStripe } from "@stripe/stripe-js";
-
-const stripePromise = loadStripe(
-	"pk_test_51IxqlgSFv3T0wJaKE0LvmDiL2ovRnHEa4vn13GghMzXSdm2bjPQuaqpKFvQk5QPUdQHsgEEyDJ1Otohv5eUSam4w00ZfYqBRj5"
-);
 
 const Payment = () => {
+	const history = useHistory();
 	const user = useSelector((state) => state.user);
 	const cart = useSelector((state) => state.cart);
 	const { addresses } = cart;
 	const dispatch = useDispatch();
 	const [address, setAddress] = useState(addresses[0] || null);
 	const [showAddAddress, setShowAddAddress] = useState(false);
+
+	useEffect(() => {
+		if (!user) {
+			history.push("/login");
+		}
+	}, []);
+
+	const onToken = async (token) => {
+		const res = await axios.post("/api/payment", {
+			amount: calculateTotal(cart.cartItems),
+			token,
+		});
+		const order = {
+			user: user.id,
+			shippingAddress: address,
+			totalPrice: calculateTotal(cart.cartItems),
+			orderItems: cart.cartItems,
+		};
+		dispatch(createOrder(order));
+	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -42,27 +61,6 @@ const Payment = () => {
 		return;
 	};
 
-	const order = async (e) => {
-		const order = {
-			user: user.id,
-			shippingAddress: address,
-			totalPrice: calculateTotal(cart.cartItems),
-			orderItems: cart.cartItems,
-		};
-		const stripe = await stripePromise;
-		const response = await fetch("/api/order/create-checkout-session", {
-			method: "POST",
-		});
-		const session = await response.json();
-		const result = await stripe.redirectToCheckout({
-			sessionId: session.id,
-		});
-		if (result.error) {
-			console.log("Something wrong");
-		}
-		// dispatch(createOrder(order));
-	};
-
 	return (
 		<Box px="28" py="10">
 			<div>
@@ -70,10 +68,8 @@ const Payment = () => {
 				<Stack mt="5" spacing="10px">
 					{addresses.map((x, i) => (
 						<Box
-							bg={x.address === address.address ? "gray.200" : "white"}
-							textColor={
-								x.address === address.address ? "gray.700" : "gray.700"
-							}
+							bg={x === address ? "gray.200" : "white"}
+							textColor={x === address ? "gray.700" : "gray.700"}
 							borderRadius="4px"
 							p="3"
 							key={i}
@@ -121,15 +117,18 @@ const Payment = () => {
 					</Button>
 				</form>
 			</Box>
-			<Button
-				mt="10"
-				colorScheme="purple"
-				onClick={order}
-				isFullWidth
-				size="lg"
-			>
-				Confirm Order
-			</Button>
+			<Box mt="8">
+				<StripeCheckout
+					label="Place Order"
+					name="Sneax"
+					billingAddress
+					shippingAddress
+					amount={calculateTotal(cart.cartItems) * 100}
+					panelLabel="Pay"
+					token={onToken}
+					stripeKey="pk_test_51IxqlgSFv3T0wJaKE0LvmDiL2ovRnHEa4vn13GghMzXSdm2bjPQuaqpKFvQk5QPUdQHsgEEyDJ1Otohv5eUSam4w00ZfYqBRj5"
+				/>
+			</Box>
 		</Box>
 	);
 };

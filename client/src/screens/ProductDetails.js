@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import {
+	useToast,
 	Flex,
 	Box,
 	Heading,
@@ -17,6 +18,7 @@ import { bringProductDetails } from "../store/actions/productActions";
 import { addToCart } from "../store/actions/cartActions";
 
 const ProductDetails = () => {
+	const toast = useToast();
 	const { id } = useParams();
 	const dispatch = useDispatch();
 	const [quantity, setQuantity] = useState(1);
@@ -43,6 +45,13 @@ const ProductDetails = () => {
 				quantity,
 			})
 		);
+		toast({
+			title: "Item Added",
+			description: `${productDetails.name} has been added to cart!`,
+			status: "success",
+			duration: 3000,
+			isClosable: true,
+		});
 	};
 
 	if (error) return <p>Error</p>;
@@ -93,7 +102,7 @@ const ProductDetails = () => {
 						<Text>Select Size:</Text>
 						<Flex justifyContent="start" mt="2">
 							{[5, 6, 7, 8, 9, 10, 11].map((x) => (
-								<Box>
+								<Box key={x}>
 									<FormLabel
 										htmlFor={x}
 										display="flex"
