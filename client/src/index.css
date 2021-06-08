@@ -5,6 +5,13 @@ body {
 	/*font-family: "Space Grotesk", sans-serif !important;*/
 }
 
+#banner {
+	/*position: absolute;*/
+	top: 0;
+	left: 0;
+	z-index: -1;
+}
+
 .cart-no {
 	background: #805ad5;
 	border-radius: 100px;

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../store/actions/userActions";
 import { useEffect } from "react";
 import {
-	Flex,
 	Box,
 	Button,
 	Text,
@@ -22,7 +21,7 @@ const Signup = () => {
 
 	useEffect(() => {
 		if (user !== null) history.push("/");
-	}, [user]);
+	}, [user, history]);
 
 	const signUpUser = (e) => {
 		e.preventDefault();

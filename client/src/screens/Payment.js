@@ -5,10 +5,9 @@ import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import {
-	Flex,
+	useToast,
 	Box,
 	Input,
-	Text,
 	Stack,
 	Button,
 	FormLabel,
@@ -18,6 +17,7 @@ import {
 import { calculateTotal } from "../utils";
 
 const Payment = () => {
+	const toast = useToast();
 	const history = useHistory();
 	const user = useSelector((state) => state.user);
 	const cart = useSelector((state) => state.cart);
@@ -30,10 +30,10 @@ const Payment = () => {
 		if (!user) {
 			history.push("/login");
 		}
-	}, []);
+	}, [user, history]);
 
 	const onToken = async (token) => {
-		const res = await axios.post("/api/payment", {
+		await axios.post("/api/payment", {
 			amount: calculateTotal(cart.cartItems),
 			token,
 		});
@@ -44,6 +44,14 @@ const Payment = () => {
 			orderItems: cart.cartItems,
 		};
 		dispatch(createOrder(order));
+		toast({
+			title: "Order Placed",
+			description: `Your Order has been successfully placed.`,
+			status: "success",
+			duration: 9000,
+			isClosable: true,
+		});
+		history.push("/");
 	};
 
 	const handleSubmit = (e) => {
@@ -64,30 +72,33 @@ const Payment = () => {
 	return (
 		<Box px="28" py="10">
 			<div>
-				<Text fontSize="2xl">Select Address</Text>
 				<Stack mt="5" spacing="10px">
-					{addresses.map((x, i) => (
-						<Box
-							bg={x === address ? "gray.200" : "white"}
-							textColor={x === address ? "gray.700" : "gray.700"}
-							borderRadius="4px"
-							p="3"
-							key={i}
-							onClick={(e) => setAddress(x)}
+					<Box>
+						<FormLabel htmlFor="address" fontSize="2xl" fontWeight="600">
+							Select address
+						</FormLabel>
+						<RadioGroup
+							name="address"
+							value={JSON.stringify(address)}
+							onChange={(add) => setAddress(JSON.parse(add))}
 						>
-							<p>
-								{Object.entries(x)
-									.map((x) => x[1])
-									.join(", ")}
-							</p>
-						</Box>
-					))}
+							<Stack spacing="1rem">
+								{addresses.map((x, i) => (
+									<Radio colorScheme="purple" value={JSON.stringify(x)} key={i}>
+										{Object.entries(x)
+											.map((x) => x[1])
+											.join(", ")}
+									</Radio>
+								))}
+							</Stack>
+						</RadioGroup>
+					</Box>
 					<Box>
 						<Button
 							colorScheme={showAddAddress ? "red" : "cyan"}
 							variant={showAddAddress ? "outline" : "ghost"}
 							size="sm"
-							mt="5"
+							mt="2"
 							onClick={() => setShowAddAddress(!showAddAddress)}
 						>
 							{showAddAddress ? "Cancel" : "Add new address"}
@@ -117,7 +128,17 @@ const Payment = () => {
 					</Button>
 				</form>
 			</Box>
-			<Box mt="8">
+			<Box mt="12">
+				<FormLabel htmlFor="payment-method" fontSize="2xl" fontWeight="600">
+					Select payment method
+				</FormLabel>
+				<RadioGroup name="payment-method" defaultValue="card">
+					<Radio colorScheme="purple" isChecked value="card">
+						Card
+					</Radio>
+				</RadioGroup>
+			</Box>
+			<Box mt="12">
 				<StripeCheckout
 					label="Place Order"
 					name="Sneax"

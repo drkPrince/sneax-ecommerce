@@ -2,17 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import {
-	Flex,
-	Box,
-	Button,
-	Text,
-	Select,
-	Image,
-	Stack,
-	StackDivider,
-	FormLabel,
-} from "@chakra-ui/react";
+import { Flex, Box, Text, Stack, StackDivider } from "@chakra-ui/react";
 
 const Orders = () => {
 	const history = useHistory();
@@ -27,7 +17,7 @@ const Orders = () => {
 			},
 		};
 		axios.get("/api/order", config).then((res) => setOrders(res.data));
-	}, [user]);
+	}, [user, history]);
 
 	return (
 		<Box pl="8" pr="16" py="12">

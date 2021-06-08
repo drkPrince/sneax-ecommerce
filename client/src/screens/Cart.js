@@ -8,7 +8,6 @@ import {
 	Button,
 	Text,
 	Select,
-	Image,
 	Badge,
 	FormLabel,
 } from "@chakra-ui/react";

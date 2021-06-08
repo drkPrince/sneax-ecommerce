@@ -1,4 +1,6 @@
 import User from "../models/userModel.js";
+import asyncHandler from "express-async-handler";
+
 import { generateToken } from "../utils/jwt.js";
 
 export const getProfile = async (req, res) => {
@@ -6,7 +8,7 @@ export const getProfile = async (req, res) => {
 	res.send(theUser);
 };
 
-export const login = async (req, res) => {
+export const login = asyncHandler(async (req, res) => {
 	const { email, password } = req.body;
 	const theUser = await User.findOne({ email: email });
 	if (theUser && (await theUser.comparePasswords(password))) {
@@ -18,9 +20,10 @@ export const login = async (req, res) => {
 			token: generateToken(theUser._id),
 		});
 	} else {
-		res.status(401).send("Not Authorised. Invalid email or password");
+		res.status(401);
+		throw new Error("Invalid email or password");
 	}
-};
+});
 
 export const signup = async (req, res) => {
 	const { name, email, password } = req.body;

@@ -1,10 +1,15 @@
 import dotenv from "dotenv";
 import express from "express";
 import connectDB from "./config/db.js";
+
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
+
+import { errorHandler } from "./middleware/errorMiddleware.js";
+
 import Stripe from "stripe";
+
 dotenv.config();
 
 const stripe = new Stripe(
@@ -40,6 +45,8 @@ app.post("/api/payment", (req, res) => {
 		}
 	});
 });
+
+app.use(errorHandler);
 
 app.listen(
 	process.env.PORT,

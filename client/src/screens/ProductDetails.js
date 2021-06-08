@@ -5,13 +5,14 @@ import {
 	useToast,
 	Flex,
 	Box,
-	Heading,
 	Button,
 	Text,
 	Select,
 	Image,
 	Badge,
 	FormLabel,
+	Stack,
+	Spinner,
 } from "@chakra-ui/react";
 
 import { bringProductDetails } from "../store/actions/productActions";
@@ -56,10 +57,15 @@ const ProductDetails = () => {
 
 	if (error) return <p>Error</p>;
 
-	if (loading) return <p>loading...</p>;
+	if (loading)
+		return (
+			<Flex justifyContent="center" alignItems="center" mt="20%">
+				<Spinner color="purple.700" size="xl" />
+			</Flex>
+		);
 
 	return (
-		<Box px="8">
+		<Box pl="8" pr="3">
 			<Flex>
 				<Box w="50%" maxHeight="90vh">
 					<Image
@@ -76,10 +82,15 @@ const ProductDetails = () => {
 					justifyContent="center"
 					flexDirection="column"
 				>
-					<Text fontSize="4xl" textColor="gray.700">
+					<Text
+						fontSize="4xl"
+						textColor="gray.700"
+						fontWeight="600"
+						lineHeight="1.2"
+					>
 						{productDetails?.name}
 					</Text>
-					<Text fontWeight="600" fontSize="2xl" mb="4">
+					<Text fontWeight="400" fontSize="3xl" mb="4" textColor="gray.600">
 						<Text fontSize="sm" as="sup">
 							$
 						</Text>
@@ -134,34 +145,33 @@ const ProductDetails = () => {
 							<Link to="/cart">
 								<Flex alignItems="center">
 									Go to cart
-									<svg
-										fill="none"
-										width="0.9rem"
-										height="0.9rem"
-										stroke="currentColor"
-										viewBox="0 0 24 24"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<path
-											strokeLinecap="round"
-											strokeLinejoin="round"
-											strokeWidth={2}
-											d="M14 5l7 7m0 0l-7 7m7-7H3"
-										/>
-									</svg>
+									<Box ml="1">
+										<svg
+											fill="none"
+											width="1.2rem"
+											stroke="currentColor"
+											viewBox="0 0 24 24"
+											xmlns="http://www.w3.org/2000/svg"
+										>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												strokeWidth={2}
+												d="M14 5l7 7m0 0l-7 7m7-7H3"
+											/>
+										</svg>
+									</Box>
 								</Flex>
 							</Link>
 						</Button>
 					) : (
 						<Box mt="3">
-							<Flex>
-								<Box mr="5">
+							<Stack spacing="2rem" direction="row">
+								<Box>
 									<FormLabel htmlFor="qty" fontWeight="600">
 										Quantity
 									</FormLabel>
 									<Select
-										w="4rem"
-										mr="2"
 										variant="filled"
 										size="sm"
 										name="qty"
@@ -180,22 +190,20 @@ const ProductDetails = () => {
 										Size
 									</FormLabel>
 									<Select
-										w="4rem"
-										mr="2"
 										variant="filled"
 										size="sm"
 										name="size"
 										value={selectedSize}
 										onChange={(e) => setSelectedSize(e.target.value)}
 									>
-										<option value={5}>5</option>
-										<option value={6}>6</option>
-										<option value={7}>7</option>
-										<option value={8}>8</option>
-										<option value={9}>9</option>
+										<option value={5}>US 5</option>
+										<option value={6}>US 6</option>
+										<option value={7}>US 7</option>
+										<option value={8}>US 8</option>
+										<option value={9}>US 9</option>
 									</Select>
 								</Box>
-							</Flex>
+							</Stack>
 							<Button
 								colorScheme="purple"
 								onClick={addItemToCart}

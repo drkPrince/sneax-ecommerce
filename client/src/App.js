@@ -1,7 +1,7 @@
 import Products from "./screens/Products";
 import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter, Route, Link } from "react-router-dom";
-import { Flex, Text, Icon, Box } from "@chakra-ui/react";
+import { Flex, Text, Box } from "@chakra-ui/react";
 
 import ProductDetails from "./screens/ProductDetails";
 import Cart from "./screens/Cart";
