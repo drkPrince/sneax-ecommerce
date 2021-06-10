@@ -20,7 +20,7 @@ const initialState = {
 		cartItems: JSON.parse(localStorage.getItem("cart")) || [],
 		addresses: JSON.parse(localStorage.getItem("addresses")) || [],
 	},
-	user: JSON.parse(localStorage.getItem("user")) || null,
+	user: JSON.parse(localStorage.getItem("userInfo")) || null,
 };
 
 const middleware = [thunk];

@@ -19,7 +19,7 @@ const Cart = () => {
 	const user = useSelector((state) => state.user);
 
 	function handleClick() {
-		if (user) history.push("/payment");
+		if (user?.userInfo) history.push("/payment");
 		else history.push("/login");
 	}
 

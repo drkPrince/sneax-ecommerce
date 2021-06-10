@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import nike from "../assets/nike.jpg";
+import nike from "../assets/nike2.jpg";
 import {
 	Grid,
 	Text,
@@ -68,9 +68,30 @@ const Products = () => {
 
 	return (
 		<>
-			<Box py="12" mx="20">
-				<img id="banner" src={nike} alt="nike" />
-				<Stack justifyContent="flex-end" my="6" spacer="20px" direction="row">
+			<Box py="12" mx="24">
+				<Box w="100%">
+					<Text
+						className="copy"
+						fontSize="6xl"
+						lineHeight="1"
+						textAlign="center"
+						mt="12"
+						textColor="gray.700"
+					>
+						Shop the best collection of{" "}
+						<Box as="span" textColor="purple.700">
+							sneakers.
+						</Box>
+					</Text>
+				</Box>
+
+				<Stack
+					justifyContent="flex-end"
+					mt="20"
+					mb="12"
+					spacer="20px"
+					direction="row"
+				>
 					<Menu closeOnSelect={false}>
 						<MenuButton size="sm" as={Button} colorScheme="gray">
 							<Flex alignItems="center">

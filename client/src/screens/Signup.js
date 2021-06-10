@@ -2,17 +2,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../store/actions/userActions";
 import { useEffect } from "react";
-import {
-	Box,
-	Button,
-	Text,
-	Input,
-	FormControl,
-	FormLabel,
-	FormErrorMessage,
-	FormHelperText,
-	VStack,
-} from "@chakra-ui/react";
+import { Box, Button, Text, Input, FormLabel, VStack } from "@chakra-ui/react";
 
 const Signup = () => {
 	const dispatch = useDispatch();
@@ -20,7 +10,7 @@ const Signup = () => {
 	const history = useHistory();
 
 	useEffect(() => {
-		if (user !== null) history.push("/");
+		if (user && !user?.signUpError && !user?.loginError) history.push("/");
 	}, [user, history]);
 
 	const signUpUser = (e) => {
@@ -55,6 +45,7 @@ const Signup = () => {
 					<Button colorScheme="green" type="submit">
 						Create an account
 					</Button>
+					<Text textColor="red.800">{user?.signUpError}</Text>
 				</VStack>
 			</form>
 		</Box>

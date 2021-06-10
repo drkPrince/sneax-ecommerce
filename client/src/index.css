@@ -6,10 +6,15 @@ body {
 }
 
 #banner {
-	/*position: absolute;*/
-	top: 0;
-	left: 0;
-	z-index: -1;
+	width: 100%;
+	height: 700px;
+	background-size: cover;
+	background-image: url(./assets/nike.jpg);
+}
+
+.copy {
+	font-family: "Space Grotesk", sans-serif !important;
+	font-weight: 600;
 }
 
 .cart-no {
@@ -35,7 +40,7 @@ input[type="radio"] {
 nav {
 	display: flex;
 	justify-content: space-between;
-	padding: 1.7rem 2rem;
+	padding: 2rem 6rem;
 }
 
 nav > * {

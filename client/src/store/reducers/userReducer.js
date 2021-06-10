@@ -1,24 +1,33 @@
-export const userReducer = (initialState = null, action) => {
+export const userReducer = (state = null, action) => {
 	switch (action.type) {
-		case "LOGIN": {
-			localStorage.setItem("user", JSON.stringify(action.payload.user));
-			return action.payload.user;
+		case "LOGIN_SUCCESS": {
+			localStorage.setItem("userInfo", JSON.stringify(action.payload));
+			return action.payload;
+		}
+
+		case "LOGIN_FAIL": {
+			return action.payload;
+		}
+
+		case "SIGNUP_SUCCESS": {
+			localStorage.setItem("userInfo", JSON.stringify(action.payload));
+			return action.payload;
+		}
+
+		case "SIGNUP_FAIL": {
+			console.log(action.payload.user);
+			return action.payload;
 		}
 
 		case "LOGOUT": {
-			localStorage.removeItem("user");
+			localStorage.removeItem("userInfo");
 			localStorage.removeItem("cart");
-			initialState.user = null;
+			state.user = null;
 			window.location.href = "/";
-			return initialState;
-		}
-
-		case "SIGNUP": {
-			localStorage.setItem("user", JSON.stringify(action.payload.user));
-			return action.payload.user;
+			return state;
 		}
 
 		default:
-			return initialState;
+			return state;
 	}
 };

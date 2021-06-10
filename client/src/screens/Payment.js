@@ -27,7 +27,7 @@ const Payment = () => {
 	const [showAddAddress, setShowAddAddress] = useState(false);
 
 	useEffect(() => {
-		if (!user) {
+		if (!user?.userInfo) {
 			history.push("/login");
 		}
 	}, [user, history]);
@@ -66,6 +66,7 @@ const Payment = () => {
 				country: elements.country.value,
 			})
 		);
+		setShowAddAddress(false);
 		return;
 	};
 
@@ -84,7 +85,12 @@ const Payment = () => {
 						>
 							<Stack spacing="1rem">
 								{addresses.map((x, i) => (
-									<Radio colorScheme="purple" value={JSON.stringify(x)} key={i}>
+									<Radio
+										colorScheme="purple"
+										value={JSON.stringify(x)}
+										key={i}
+										isRequired
+									>
 										{Object.entries(x)
 											.map((x) => x[1])
 											.join(", ")}
@@ -139,16 +145,18 @@ const Payment = () => {
 				</RadioGroup>
 			</Box>
 			<Box mt="12">
-				<StripeCheckout
-					label="Place Order"
-					name="Sneax"
-					billingAddress
-					shippingAddress
-					amount={calculateTotal(cart.cartItems) * 100}
-					panelLabel="Pay"
-					token={onToken}
-					stripeKey="pk_test_51IxqlgSFv3T0wJaKE0LvmDiL2ovRnHEa4vn13GghMzXSdm2bjPQuaqpKFvQk5QPUdQHsgEEyDJ1Otohv5eUSam4w00ZfYqBRj5"
-				/>
+				{address && (
+					<StripeCheckout
+						label="Place Order"
+						name="Sneax"
+						billingAddress
+						shippingAddress
+						amount={calculateTotal(cart.cartItems) * 100}
+						panelLabel="Pay"
+						token={onToken}
+						stripeKey="pk_test_51IxqlgSFv3T0wJaKE0LvmDiL2ovRnHEa4vn13GghMzXSdm2bjPQuaqpKFvQk5QPUdQHsgEEyDJ1Otohv5eUSam4w00ZfYqBRj5"
+					/>
+				)}
 			</Box>
 		</Box>
 	);

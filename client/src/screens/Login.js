@@ -31,7 +31,7 @@ const Login = () => {
 	};
 
 	useEffect(() => {
-		if (user !== null) {
+		if (user?.userInfo) {
 			history.push("/");
 		}
 	}, [history, user]);
@@ -55,6 +55,8 @@ const Login = () => {
 					<Button colorScheme="purple" type="submit">
 						Log in
 					</Button>
+
+					<Text textColor="red.800">{user?.loginError}</Text>
 				</VStack>
 			</form>
 		</Flex>

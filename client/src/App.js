@@ -30,7 +30,7 @@ const App = () => {
 						<Link to="/">Sneax 👟</Link>
 					</Text>
 					<Flex>
-						{user ? (
+						{user?.userInfo ? (
 							<Flex className="nav-item">
 								{user && <h4>{user.name}</h4>}
 								<Box>

@@ -21,15 +21,17 @@ export const login = asyncHandler(async (req, res) => {
 		});
 	} else {
 		res.status(401);
-		throw new Error("Invalid email or password");
+		throw new Error("Invalid email or password.");
 	}
 });
 
-export const signup = async (req, res) => {
+export const signup = asyncHandler(async (req, res) => {
 	const { name, email, password } = req.body;
 	const doesExists = await User.findOne({ email });
-	if (doesExists) res.status(403).send("User already exists");
-	else {
+	if (doesExists) {
+		res.status(403);
+		throw new Error("User already exists.");
+	} else {
 		const newbie = await User.create({ name, email, password });
 		if (newbie)
 			res.status(201).json({
@@ -40,4 +42,4 @@ export const signup = async (req, res) => {
 			});
 		else res.status(400).send("INVALID");
 	}
-};
+});

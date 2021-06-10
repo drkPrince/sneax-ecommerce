@@ -10,7 +10,7 @@ const Orders = () => {
 	const [orders, setOrders] = useState([]);
 
 	useEffect(() => {
-		if (!user.token) history.push("/login");
+		if (user?.userInfo) history.push("/login");
 		const config = {
 			headers: {
 				Authorization: `Bearer ${user.token}`,
