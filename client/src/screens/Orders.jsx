@@ -10,23 +10,29 @@ const Orders = () => {
 	const [orders, setOrders] = useState([]);
 
 	useEffect(() => {
-		if (user?.userInfo) history.push("/login");
+		if (!user?.userInfo) history.push("/login");
 		const config = {
 			headers: {
-				Authorization: `Bearer ${user.token}`,
+				Authorization: `Bearer ${user.userInfo.token}`,
 			},
 		};
 		axios.get("/api/order", config).then((res) => setOrders(res.data));
 	}, [user, history]);
 
 	return (
-		<Box pl="8" pr="16" py="12">
-			<Text textColor="gray.600" fontSize="2xl" mb="6">
+		<Box px={["4", "12", "24"]} py="12">
+			<Text textColor="gray.600" fontSize="3xl" mb="6">
 				Your Orders
 			</Text>
-			<Stack divider={<StackDivider borderColor="gray.200" />}>
+			<Stack divider={<StackDivider borderColor="gray.200" />} spacing="3rem">
 				{orders.map((x) => (
-					<Flex key={x._id} mb="4" justifyContent="space-between" w="100%">
+					<Flex
+						key={x._id}
+						mb={["2", "4"]}
+						justifyContent="space-between"
+						w="100%"
+						direction={["column", "row"]}
+					>
 						<Stack spacing="12px">
 							<Box>
 								<Text textColor="purple.500" fontSize="sm">
@@ -63,13 +69,13 @@ const Orders = () => {
 								</Text>
 								<Text textColor="gray.800">
 									{x.orderItems.map((y) => (
-										<Text>{y.name}</Text>
+										<Text key={y.name}>{y.name}</Text>
 									))}
 								</Text>
 							</Box>
 						</Stack>
 
-						<Box>
+						<Box pt={["5", "0"]}>
 							<Text
 								textTransform="uppercase"
 								textColor="purple.800"

@@ -8,6 +8,7 @@ import {
 	Button,
 	Text,
 	Select,
+	Stack,
 	Badge,
 	FormLabel,
 } from "@chakra-ui/react";
@@ -17,6 +18,9 @@ const Cart = () => {
 	const dispatch = useDispatch();
 	const cart = useSelector((state) => state.cart);
 	const user = useSelector((state) => state.user);
+
+	const fontSize1 = ["lg", "xl", "2xl"];
+	const fontSize2 = ["sm", "md", "md"];
 
 	function handleClick() {
 		if (user?.userInfo) history.push("/payment");
@@ -32,47 +36,56 @@ const Cart = () => {
 	}
 
 	return (
-		<Flex px="8" pt="16">
-			<Box w="70vw" pr="28">
+		<Flex
+			px={["1", "1", "8"]}
+			py="16"
+			flexDirection={["column", "column", "row"]}
+		>
+			<Box w={["100%", "100%", "70vw"]} pr={["1", "1", "28"]}>
 				{cart.cartItems.map((x) => (
 					<Flex
 						key={x.id}
-						my="4"
-						justifyContent="space-between"
+						mb="4"
+						justifyContent={["flex-start", "space-between"]}
+						alignItems="flex-start"
 						borderRadius="7px"
 						border="1px"
 						borderColor="gray.200"
 						p="3"
+						flexDirection={["column", "row"]}
 					>
 						<Flex>
-							<Box>
-								<img width="150px" src={x.img} alt="" />
+							<Box width={["30%"]}>
+								<img w="100%" src={x.img} alt={x.name} />
 							</Box>
-							<Box ml="5">
-								<Text fontSize="2xl" fontWeight="400" textColor="gray.800">
+							<Stack width={["70%"]} ml="5" spacing={["2", "2", "3"]}>
+								<Text
+									fontSize={fontSize1}
+									fontWeight="400"
+									textColor="gray.800"
+								>
 									<Link to={`/product/${x.id}`}>
 										{x.name} ({x.size})
 									</Link>
 								</Text>
-								<Flex my="3">
+								<Flex fontSize={fontSize2}>
 									<Text textColor="gray.500">Subtotal</Text>
-									<Text
-										mx="3"
-										fontSize="md"
-										textColor="purple.800"
-										fontWeight="600"
-									>
+									<Text mx="3" textColor="purple.800" fontWeight="600">
 										${x.price * x.quantity}.00
 									</Text>
 								</Flex>
-								<Flex my="3">
+								<Flex fontSize={fontSize2}>
 									<Text textColor="gray.500">Unit Price</Text>
-									<Text mx="3" fontSize="md" textColor="purple.600">
+									<Text mx="3" textColor="purple.600">
 										{x.price}.00
 									</Text>
 								</Flex>
-								<Flex alignItems="center" my="3">
-									<FormLabel textColor="gray.500" htmlFor="qty">
+								<Flex alignItems="center" fontSize={fontSize2}>
+									<FormLabel
+										fontSize={fontSize2}
+										textColor="gray.500"
+										htmlFor="qty"
+									>
 										Quantity
 									</FormLabel>
 									<Select
@@ -101,7 +114,7 @@ const Cart = () => {
 										<option value={5}>5</option>
 									</Select>
 								</Flex>
-							</Box>
+							</Stack>
 						</Flex>
 						<Button
 							colorScheme="red"
@@ -114,23 +127,27 @@ const Cart = () => {
 					</Flex>
 				))}
 			</Box>
-			<Box w="30vw">
-				<Flex my="3" justifyContent="space-between" textColor="gray.700">
+			<Stack
+				w={["100%", "100%", "30vw"]}
+				spacing={["2", "2", "3"]}
+				px={["2", "2", "1"]}
+			>
+				<Flex justifyContent="space-between" textColor="gray.700">
 					<Text>Total amount</Text>
 					<Text>{calculateTotal(cart.cartItems)}</Text>
 				</Flex>
-				<Flex my="3" justifyContent="space-between" textColor="gray.700">
+				<Flex justifyContent="space-between" textColor="gray.700">
 					<Text>Shipping cost</Text>
 					<Box>
 						<Badge colorScheme="green">free</Badge>
 					</Box>
 				</Flex>
-				<Flex my="3" justifyContent="space-between" textColor="gray.700">
+				<Flex justifyContent="space-between" textColor="gray.700">
 					<Text>Taxes</Text>
 					<Text>1.25</Text>
 				</Flex>
 				<hr />
-				<Flex justifyContent="space-between" textColor="gray.900" my="3">
+				<Flex justifyContent="space-between" textColor="gray.900">
 					<Box>Grand Total</Box>
 
 					<Box fontWeight="600">${calculateTotal(cart.cartItems) + 1.25}</Box>
@@ -139,7 +156,7 @@ const Cart = () => {
 				<Button colorScheme="purple" onClick={handleClick} w="100%" mt="8">
 					Checkout
 				</Button>
-			</Box>
+			</Stack>
 		</Flex>
 	);
 };

@@ -71,7 +71,7 @@ const Payment = () => {
 	};
 
 	return (
-		<Box px="28" py="10">
+		<Box px={["8", "12", "28"]} py="10">
 			<div>
 				<Stack mt="5" spacing="10px">
 					<Box>

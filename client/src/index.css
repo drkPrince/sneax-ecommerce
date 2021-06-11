@@ -5,16 +5,19 @@ body {
 	/*font-family: "Space Grotesk", sans-serif !important;*/
 }
 
-#banner {
-	width: 100%;
-	height: 700px;
-	background-size: cover;
-	background-image: url(./assets/nike.jpg);
-}
-
 .copy {
 	font-family: "Space Grotesk", sans-serif !important;
 	font-weight: 600;
+}
+
+.img-con {
+	overflow: hidden;
+}
+
+.product-img {
+	background-size: cover;
+	background-position: top;
+	width: 100%;
 }
 
 .cart-no {
@@ -33,18 +36,10 @@ body {
 	top: -3px;
 }
 
-input[type="radio"] {
-	appearance: none;
-}
-
 nav {
 	display: flex;
 	justify-content: space-between;
-	padding: 2rem 6rem;
-}
-
-nav > * {
-	margin: 0 0 0 4rem;
+	font-family: "Space Grotesk", sans-serif !important;
 }
 
 .product:hover {
@@ -52,6 +47,12 @@ nav > * {
 	transition: 0.2s ease-in-out;
 }
 
-.nav-item > * {
-	margin: 0 1rem;
+nav a:hover {
+	text-decoration: underline;
+	transition: 2s ease-in;
+	color: purple !important;
+}
+
+.logout-btn:hover {
+	color: indianred !important;
 }

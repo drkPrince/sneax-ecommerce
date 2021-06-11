@@ -4,13 +4,15 @@ import { Text, Flex } from "@chakra-ui/react";
 const Product = ({ product }) => {
 	return (
 		<Link className="product" to={`/product/${product._id}`}>
-			<div>
-				<img width="100%" src={product.imageUrl} alt={product.name} />
+			<div style={{ minHeight: "200px", width: "100%" }}>
+				<img src={product.imageUrl} alt={product.name} />
 			</div>
 			<Flex justifyContent="space-between">
-				<Text textColor="gray.700">{product.name}</Text>
-				<Text fontWeight="600">${product.price}</Text>
+				<Text noOfLines={1} textColor="gray.700" fontSize={["sm", "md"]}>
+					{product.name}
+				</Text>
 			</Flex>
+			<Text fontWeight="600">${product.price}</Text>
 		</Link>
 	);
 };

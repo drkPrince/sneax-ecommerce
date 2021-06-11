@@ -8,10 +8,7 @@ import {
 	Button,
 	Text,
 	Input,
-	Heading,
 	FormLabel,
-	FormErrorMessage,
-	FormHelperText,
 	VStack,
 } from "@chakra-ui/react";
 

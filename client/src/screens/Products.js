@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import nike from "../assets/nike2.jpg";
 import {
 	Grid,
 	Text,
@@ -50,6 +49,9 @@ const Products = () => {
 					setProducts(filteredAndSorted);
 					return;
 				}
+
+				default:
+					return;
 			}
 		} else setProducts(filteredAndSorted);
 	};
@@ -68,11 +70,11 @@ const Products = () => {
 
 	return (
 		<>
-			<Box py="12" mx="24">
-				<Box w="100%">
+			<Box py="12" mx={[8, 12, 24]}>
+				<Box w="100%" className="banner">
 					<Text
 						className="copy"
-						fontSize="6xl"
+						fontSize={["3xl", "4xl", "6xl"]}
 						lineHeight="1"
 						textAlign="center"
 						mt="12"
@@ -87,13 +89,13 @@ const Products = () => {
 
 				<Stack
 					justifyContent="flex-end"
-					mt="20"
+					mt={["8", "20"]}
 					mb="12"
 					spacer="20px"
 					direction="row"
 				>
 					<Menu closeOnSelect={false}>
-						<MenuButton size="sm" as={Button} colorScheme="gray">
+						<MenuButton size={["xs"]} as={Button} colorScheme="gray">
 							<Flex alignItems="center">
 								<Text>Show Category</Text>
 								<Box ml="1">
@@ -129,7 +131,7 @@ const Products = () => {
 					</Menu>
 
 					<Menu>
-						<MenuButton size="sm" as={Button} colorScheme="gray">
+						<MenuButton size={["xs"]} as={Button} colorScheme="gray">
 							<Flex alignItems="center">
 								<Text>Sort</Text>
 								<Box ml="1">
@@ -165,13 +167,24 @@ const Products = () => {
 						</MenuList>
 					</Menu>
 				</Stack>
-				<Grid templateColumns="repeat(5, 1fr)" gap={6}>
-					{products.length === 0 ? (
-						<Box>Nothing Found</Box>
-					) : (
-						products.map((p) => <Product product={p} key={p._id} />)
-					)}
-				</Grid>
+				{products.length === 0 ? (
+					<Box w="100%" textAlign="center">
+						Nothing Found
+					</Box>
+				) : (
+					<Grid
+						templateColumns={[
+							"repeat(2, 1fr)",
+							"repeat(3, 1fr)",
+							"repeat(4, 1fr)",
+						]}
+						gap={6}
+					>
+						{products.map((p) => (
+							<Product product={p} key={p._id} />
+						))}
+					</Grid>
+				)}
 			</Box>
 		</>
 	);

@@ -65,9 +65,9 @@ const ProductDetails = () => {
 		);
 
 	return (
-		<Box pl="8" pr="3">
-			<Flex>
-				<Box w="50%" maxHeight="90vh">
+		<Box px={["2", "12"]}>
+			<Flex flexDirection={["column", "column", "row"]} alignItems="center">
+				<Box w={["100%", "100%", "50%"]} h="90vh">
 					<Image
 						boxSize="100%"
 						objectFit="cover"
@@ -76,14 +76,14 @@ const ProductDetails = () => {
 					/>
 				</Box>
 				<Box
-					pt="12"
-					px="16"
-					w="50%"
+					px={["3", "6", "12"]}
+					py={["6", "8", "0"]}
+					w={["100%", "100%", "50%"]}
 					justifyContent="center"
 					flexDirection="column"
 				>
 					<Text
-						fontSize="4xl"
+						fontSize={["2xl", "3xl", "4xl"]}
 						textColor="gray.700"
 						fontWeight="600"
 						lineHeight="1.2"
@@ -109,36 +109,6 @@ const ProductDetails = () => {
 					>
 						{productDetails?.description}
 					</Text>
-					<Box mt="4" fontWeight="600" hidden>
-						<Text>Select Size:</Text>
-						<Flex justifyContent="start" mt="2">
-							{[5, 6, 7, 8, 9, 10, 11].map((x) => (
-								<Box key={x}>
-									<FormLabel
-										htmlFor={x}
-										display="flex"
-										justifyContent="center"
-										alignItems="center"
-										borderRadius="600px"
-										w="9"
-										h="9"
-										textColor={selectedSize === x ? "white" : "gray.700"}
-										bg={selectedSize === x ? "gray.500" : "white"}
-									>
-										<div>{x}</div>
-									</FormLabel>
-									<input
-										onChange={(e) => setSelectedSize(Number(e.target.value))}
-										id={x}
-										type="radio"
-										name="size"
-										value={x}
-										required
-									/>
-								</Box>
-							))}
-						</Flex>
-					</Box>
 
 					{isInCart ? (
 						<Button colorScheme="cyan" variant="link" mt="5" size="lg">
@@ -173,6 +143,7 @@ const ProductDetails = () => {
 									</FormLabel>
 									<Select
 										variant="filled"
+										colorScheme="purple"
 										size="sm"
 										name="qty"
 										value={quantity}
@@ -191,6 +162,7 @@ const ProductDetails = () => {
 									</FormLabel>
 									<Select
 										variant="filled"
+										colorScheme="purple"
 										size="sm"
 										name="size"
 										value={selectedSize}
