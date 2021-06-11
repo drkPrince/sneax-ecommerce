@@ -26,6 +26,10 @@ app.use(express.static(path.join(__dirname, "../client/build")));
 app.use(express.json()); //allows parsing of json in body
 
 //Routes
+app.get("/", (req, res) =>
+	res.sendFile(path.resolve(__dirname, "../client/build/index.html"))
+);
+
 app.use("/api/products", productRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/order", orderRoutes);
@@ -52,7 +56,9 @@ app.post("/api/payment", (req, res) => {
 
 app.use(errorHandler);
 
-app.get("*", (req, res) => res.sendFile("index.html"));
+app.get("*", (req, res) =>
+	res.sendFile(path.resolve(__dirname, "../client/build/index.html"))
+);
 
 app.listen(
 	process.env.PORT,
