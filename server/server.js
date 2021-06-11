@@ -1,4 +1,4 @@
-// import dotenv from "dotenv";
+import dotenv from "dotenv";
 import express from "express";
 import connectDB from "./config/db.js";
 import path from "path";
@@ -11,7 +11,7 @@ import { errorHandler } from "./middleware/errorMiddleware.js";
 
 import Stripe from "stripe";
 
-// dotenv.config();
+dotenv.config();
 
 const stripe = new Stripe(
 	"sk_test_51IxqlgSFv3T0wJaK19OU5hneuSXI5hZw83YJvE2SZVf1nyPWpohNRU52H7alUW0AN2Ek14lmvtWGmSQYCyrLh9wC009d9D1Xo2"
