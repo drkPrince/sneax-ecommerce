@@ -29,7 +29,7 @@ const App = () => {
 					maxH="10vh"
 					as="nav"
 					alignItems="center"
-					px={["6", "20"]}
+					px={["6", "8", "20"]}
 					py={["3", "8"]}
 				>
 					<Text fontWeight="600" fontSize={["xl", "2xl"]}>
@@ -48,7 +48,10 @@ const App = () => {
 								spacing={["3", "8", "12"]}
 							>
 								<Box>
-									<button className="logout-btn" onClick={logoutUser}>
+									<button
+										className="logout-btn"
+										onClick={logoutUser}
+									>
 										Logout
 									</button>
 								</Box>
@@ -67,7 +70,9 @@ const App = () => {
 
 						<Box position="relative">
 							<Link to="/cart">
-								<span className="cart-no">{cart.cartItems.length}</span>
+								<span className="cart-no">
+									{cart.cartItems.length}
+								</span>
 								<svg
 									className="cart-icon"
 									width="27px"

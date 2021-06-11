@@ -58,7 +58,11 @@ const Cart = () => {
 							<Box width={["30%"]}>
 								<img w="100%" src={x.img} alt={x.name} />
 							</Box>
-							<Stack width={["70%"]} ml="5" spacing={["2", "2", "3"]}>
+							<Stack
+								width={["70%"]}
+								ml="5"
+								spacing={["2", "2", "3"]}
+							>
 								<Text
 									fontSize={fontSize1}
 									fontWeight="400"
@@ -70,7 +74,11 @@ const Cart = () => {
 								</Text>
 								<Flex fontSize={fontSize2}>
 									<Text textColor="gray.500">Subtotal</Text>
-									<Text mx="3" textColor="purple.800" fontWeight="600">
+									<Text
+										mx="3"
+										textColor="purple.800"
+										fontWeight="600"
+									>
 										${x.price * x.quantity}.00
 									</Text>
 								</Flex>
@@ -129,8 +137,9 @@ const Cart = () => {
 			</Box>
 			<Stack
 				w={["100%", "100%", "30vw"]}
-				spacing={["2", "2", "3"]}
+				spacing="3"
 				px={["2", "2", "1"]}
+				py={["6", "4", "2"]}
 			>
 				<Flex justifyContent="space-between" textColor="gray.700">
 					<Text>Total amount</Text>
@@ -150,10 +159,17 @@ const Cart = () => {
 				<Flex justifyContent="space-between" textColor="gray.900">
 					<Box>Grand Total</Box>
 
-					<Box fontWeight="600">${calculateTotal(cart.cartItems) + 1.25}</Box>
+					<Box fontWeight="600">
+						${calculateTotal(cart.cartItems) + 1.25}
+					</Box>
 				</Flex>
 				<hr />
-				<Button colorScheme="purple" onClick={handleClick} w="100%" mt="8">
+				<Button
+					colorScheme="purple"
+					onClick={handleClick}
+					w="100%"
+					mt="8"
+				>
 					Checkout
 				</Button>
 			</Stack>
