@@ -1,8 +1,8 @@
 import connectDB from "./config/db.js";
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 import Product from "./models/productModel.js";
 
-dotenv.config();
+// dotenv.config();
 
 connectDB();
 
