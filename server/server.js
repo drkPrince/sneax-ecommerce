@@ -20,6 +20,9 @@ const stripe = new Stripe(
 connectDB();
 const app = express();
 
+const __dirname = path.resolve();
+
+app.use(express.static(path.join(__dirname, "../client/build")));
 app.use(express.json()); //allows parsing of json in body
 
 //Routes
@@ -49,15 +52,7 @@ app.post("/api/payment", (req, res) => {
 
 app.use(errorHandler);
 
-const __dirname = path.resolve();
-
-if (process.env.NODE_ENV === "production") {
-	app.use(express.static(path.join(__dirname, "../client/build")));
-
-	app.get("*", (req, res) =>
-		res.sendFile(path.resolve(__dirname, "../client/build/index.html"))
-	);
-}
+app.get("*", (req, res) => res.sendFile("index.html"));
 
 app.listen(
 	process.env.PORT,
