@@ -66,7 +66,10 @@ const ProductDetails = () => {
 
 	return (
 		<Box px={["2", "12"]}>
-			<Flex flexDirection={["column", "column", "row"]} alignItems="center">
+			<Flex
+				flexDirection={["column", "column", "row"]}
+				alignItems="center"
+			>
 				<Box w={["100%", "100%", "50%"]} h="90vh">
 					<Image
 						boxSize="100%"
@@ -87,10 +90,16 @@ const ProductDetails = () => {
 						textColor="gray.700"
 						fontWeight="600"
 						lineHeight="1.2"
+						className="shoe-name"
 					>
 						{productDetails?.name}
 					</Text>
-					<Text fontWeight="400" fontSize="3xl" mb="4" textColor="gray.600">
+					<Text
+						fontWeight="400"
+						fontSize="3xl"
+						mb="4"
+						textColor="gray.600"
+					>
 						<Text fontSize="sm" as="sup">
 							$
 						</Text>
@@ -111,7 +120,12 @@ const ProductDetails = () => {
 					</Text>
 
 					{isInCart ? (
-						<Button colorScheme="cyan" variant="link" mt="5" size="lg">
+						<Button
+							colorScheme="cyan"
+							variant="link"
+							mt="5"
+							size="lg"
+						>
 							<Link to="/cart">
 								<Flex alignItems="center">
 									Go to cart
@@ -147,7 +161,9 @@ const ProductDetails = () => {
 										size="sm"
 										name="qty"
 										value={quantity}
-										onChange={(e) => setQuantity(e.target.value)}
+										onChange={(e) =>
+											setQuantity(e.target.value)
+										}
 									>
 										<option value={1}>1</option>
 										<option value={2}>2</option>
@@ -166,7 +182,9 @@ const ProductDetails = () => {
 										size="sm"
 										name="size"
 										value={selectedSize}
-										onChange={(e) => setSelectedSize(e.target.value)}
+										onChange={(e) =>
+											setSelectedSize(e.target.value)
+										}
 									>
 										<option value={5}>US 5</option>
 										<option value={6}>US 6</option>

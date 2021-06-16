@@ -1,7 +1,7 @@
 import Products from "./screens/Products";
 import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter, Route, Link } from "react-router-dom";
-import { Flex, Text, Box, Stack } from "@chakra-ui/react";
+import { Flex, Box, Stack } from "@chakra-ui/react";
 
 import ProductDetails from "./screens/ProductDetails";
 import Cart from "./screens/Cart";
@@ -11,6 +11,8 @@ import Payment from "./screens/Payment";
 import Orders from "./screens/Orders";
 
 import { logout } from "./store/actions/userActions";
+
+import sneaker from "./assets/sneakers1.svg";
 
 const App = () => {
 	const cart = useSelector((state) => state.cart);
@@ -29,12 +31,18 @@ const App = () => {
 					maxH="10vh"
 					as="nav"
 					alignItems="center"
-					px={["6", "8", "20"]}
-					py={["3", "8"]}
+					px={[8, 12, 24]}
+					py={["8", "12"]}
 				>
-					<Text fontWeight="600" fontSize={["xl", "2xl"]}>
-						<Link to="/">Sneax </Link>
-					</Text>
+					<Flex
+						alignItems="flex-end"
+						fontWeight="600"
+						textColor="gray.800"
+						fontSize={["xl", "2xl"]}
+					>
+						<Link to="/">snx </Link>
+						<img src={sneaker} alt="sneax" />
+					</Flex>
 					<Stack
 						spacing={["3", "8", "12"]}
 						direction="row"

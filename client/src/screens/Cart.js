@@ -45,6 +45,7 @@ const Cart = () => {
 				{cart.cartItems.map((x) => (
 					<Flex
 						key={x.id}
+						shadow="sm"
 						mb="4"
 						justifyContent={["flex-start", "space-between"]}
 						alignItems="flex-start"
@@ -67,6 +68,7 @@ const Cart = () => {
 									fontSize={fontSize1}
 									fontWeight="400"
 									textColor="gray.800"
+									className="shoe-name"
 								>
 									<Link to={`/product/${x.id}`}>
 										{x.name} ({x.size})

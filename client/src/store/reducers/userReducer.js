@@ -15,7 +15,6 @@ export const userReducer = (state = null, action) => {
 		}
 
 		case "SIGNUP_FAIL": {
-			console.log(action.payload.user);
 			return action.payload;
 		}
 

@@ -19,7 +19,7 @@ const Products = () => {
 	const [products, setProducts] = useState([]);
 	const [productsCopy, setProductsCopy] = useState([]);
 	const [sort, setSort] = useState(null);
-	const [filters, setFilters] = useState(["men", "women", "kids"]);
+	const [filters] = useState(["men", "women", "kids"]);
 
 	useEffect(() => {
 		axios.get("/api/products").then((res) => {
@@ -71,21 +71,39 @@ const Products = () => {
 	return (
 		<>
 			<Box py="12" mx={[8, 12, 24]}>
-				<Box w="100%" className="banner">
-					<Text
-						className="copy"
-						fontSize={["3xl", "4xl", "6xl"]}
-						lineHeight="1"
-						textAlign="center"
-						mt="12"
-						textColor="gray.700"
-					>
-						Shop the best collection of{" "}
-						<Box as="span" textColor="purple.700">
-							sneakers.
-						</Box>
-					</Text>
-				</Box>
+				<Flex
+					w="100%"
+					className="banner"
+					maxH="70vh"
+					style={{ overflow: "hidden" }}
+				>
+					<Box pr="2">
+						<Text
+							className="copy"
+							fontSize={["3xl", "4xl", "5xl"]}
+							lineHeight="1"
+							mt="12"
+							textColor="purple.900"
+							fontWeight="600"
+						>
+							Shop the best collection of sneakers. ever.
+						</Text>
+						<Text
+							textColor="gray.700"
+							mt="4"
+							fontSize={["md", "lg", "xl"]}
+							lineHeight={[1.5, 2, 8]}
+						>
+							Free shipping on your first order. Beautifully
+							crafted collection. Lowest prices guaranteed. No
+							questions asked returns.
+						</Text>
+						<Button mt="4" colorScheme="purple">
+							<a href="#main">Shop Now</a>
+						</Button>
+					</Box>
+					<Box className="img-con" ml="5"></Box>
+				</Flex>
 
 				<Stack
 					justifyContent="flex-end"
@@ -93,9 +111,14 @@ const Products = () => {
 					mb="12"
 					spacer="20px"
 					direction="row"
+					id="main"
 				>
 					<Menu closeOnSelect={false}>
-						<MenuButton size={["xs"]} as={Button} colorScheme="gray">
+						<MenuButton
+							size={["sm"]}
+							as={Button}
+							colorScheme="gray"
+						>
 							<Flex alignItems="center">
 								<Text>Show Category</Text>
 								<Box ml="1">
@@ -124,14 +147,22 @@ const Products = () => {
 								type="checkbox"
 							>
 								<MenuItemOption value="men">Men</MenuItemOption>
-								<MenuItemOption value="women">Women</MenuItemOption>
-								<MenuItemOption value="kids">Kids</MenuItemOption>
+								<MenuItemOption value="women">
+									Women
+								</MenuItemOption>
+								<MenuItemOption value="kids">
+									Kids
+								</MenuItemOption>
 							</MenuOptionGroup>
 						</MenuList>
 					</Menu>
 
 					<Menu>
-						<MenuButton size={["xs"]} as={Button} colorScheme="gray">
+						<MenuButton
+							size={["sm"]}
+							as={Button}
+							colorScheme="gray"
+						>
 							<Flex alignItems="center">
 								<Text>Sort</Text>
 								<Box ml="1">
@@ -157,10 +188,16 @@ const Products = () => {
 						</MenuButton>
 						<MenuList>
 							<MenuOptionGroup title="Price" type="radio">
-								<MenuItemOption onClick={sortAscending} value="asc">
+								<MenuItemOption
+									onClick={sortAscending}
+									value="asc"
+								>
 									Ascending
 								</MenuItemOption>
-								<MenuItemOption onClick={sortDescending} value="desc">
+								<MenuItemOption
+									onClick={sortDescending}
+									value="desc"
+								>
 									Descending
 								</MenuItemOption>
 							</MenuOptionGroup>
