@@ -4,9 +4,12 @@ import { useState, useEffect } from "react";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import {
 	useToast,
 	Box,
+	Text,
+	Select,
 	Input,
 	Stack,
 	Button,
@@ -24,6 +27,8 @@ const Payment = () => {
 	const { addresses } = cart;
 	const dispatch = useDispatch();
 	const [address, setAddress] = useState(addresses[0] || null);
+	const [region, setRegion] = useState("");
+	const [country, setCountry] = useState("");
 	const [showAddAddress, setShowAddAddress] = useState(false);
 
 	useEffect(() => {
@@ -60,10 +65,10 @@ const Payment = () => {
 		dispatch(
 			addAddress({
 				address: elements.address.value,
-				state: elements.state.value,
+				state: region,
 				district: elements.district.value,
 				postalCode: elements.postalCode.value,
-				country: elements.country.value,
+				country: country,
 			})
 		);
 		setShowAddAddress(false);
@@ -75,7 +80,11 @@ const Payment = () => {
 			<div>
 				<Stack mt="5" spacing="10px">
 					<Box>
-						<FormLabel htmlFor="address" fontSize="2xl" fontWeight="600">
+						<FormLabel
+							htmlFor="address"
+							fontSize="2xl"
+							fontWeight="600"
+						>
 							Select address
 						</FormLabel>
 						<RadioGroup
@@ -121,21 +130,48 @@ const Payment = () => {
 				borderColor="gray.200"
 				borderRadius="6px"
 			>
+				<Text fontSize="2xl">Add a new address</Text>
 				<form onSubmit={handleSubmit}>
 					<Stack spacing="12px" my="5">
-						<Input name="address" type="text" placeholder="Address" />
-						<Input type="text" placeholder="District" name="district" />
-						<Input type="text" placeholder="State" name="state" />
-						<Input type="text" placeholder="Postal code" name="postalCode" />
-						<Input type="text" placeholder="Country" name="country" />
+						<Input
+							name="address"
+							type="text"
+							placeholder="Address (Street number, building number)"
+						/>
+						<Input
+							type="text"
+							placeholder="City, District"
+							name="district"
+						/>
+						<Input
+							type="text"
+							placeholder="Postal/PIN code"
+							name="postalCode"
+						/>
+						<Select
+							as={CountryDropdown}
+							value={country}
+							onChange={(val) => setCountry(val)}
+						/>{" "}
+						/>
+						<Select
+							as={RegionDropdown}
+							country={country}
+							value={region}
+							onChange={(val) => setRegion(val)}
+						/>
 					</Stack>
-					<Button w="12rem" colorScheme="green" type="submit" mt="2">
+					<Button colorScheme="blue" type="submit" mt="2">
 						Add address
 					</Button>
 				</form>
 			</Box>
 			<Box mt="12">
-				<FormLabel htmlFor="payment-method" fontSize="2xl" fontWeight="600">
+				<FormLabel
+					htmlFor="payment-method"
+					fontSize="2xl"
+					fontWeight="600"
+				>
 					Select payment method
 				</FormLabel>
 				<RadioGroup name="payment-method" defaultValue="card">

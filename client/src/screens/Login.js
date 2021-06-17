@@ -34,26 +34,43 @@ const Login = () => {
 	}, [history, user]);
 
 	return (
-		<Flex justifyContent="center" alignItems="center" pt="12">
+		<Flex justifyContent="center" alignItems="center" pt="6" mx="5">
 			<form onSubmit={loginUser} w="50%">
-				<VStack spacing="20px">
-					<Text my="3" textColor="gray.600" fontSize="3xl">
-						Log in to your account
+				<VStack
+					spacing="20px"
+					shadow="md"
+					p="8"
+					bg="gray.50"
+					border="2px"
+					borderColor="gray.100"
+				>
+					<Text
+						mb="3"
+						textColor="gray.600"
+						fontSize="3xl"
+						fontWeight="600"
+					>
+						Login
 					</Text>
-					<Box>
+					<Box w="100%">
 						<FormLabel htmlFor="email">Email</FormLabel>
 						<Input isRequired name="email" type="text" />
 					</Box>
-
-					<Box>
+					<Box w="100%">
 						<FormLabel htmlFor="password">Password</FormLabel>
 						<Input isRequired name="password" type="password" />
 					</Box>
-					<Button colorScheme="purple" type="submit">
+					<Button
+						isFullWidth
+						colorScheme="purple"
+						type="submit"
+						mt="6"
+					>
 						Log in
 					</Button>
-
-					<Text textColor="red.800">{user?.loginError}</Text>
+					{user?.loginError && (
+						<Text textColor="red.800">{user?.loginError}</Text>
+					)}
 				</VStack>
 			</form>
 		</Flex>

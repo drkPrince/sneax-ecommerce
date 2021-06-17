@@ -70,11 +70,12 @@ const Products = () => {
 
 	return (
 		<>
-			<Box py="12" mx={[8, 12, 24]}>
+			<Box pt="12" mx={[8, 12, 24]}>
 				<Flex
 					w="100%"
+					direction={["column", "column", "column", "row"]}
+					h="100vh"
 					className="banner"
-					maxH="70vh"
 					style={{ overflow: "hidden" }}
 				>
 					<Box pr="2">
@@ -82,7 +83,7 @@ const Products = () => {
 							className="copy"
 							fontSize={["3xl", "4xl", "5xl"]}
 							lineHeight="1"
-							mt="12"
+							mt={["2", "6", "12"]}
 							textColor="purple.900"
 							fontWeight="600"
 						>
@@ -102,7 +103,7 @@ const Products = () => {
 							<a href="#main">Shop Now</a>
 						</Button>
 					</Box>
-					<Box className="img-con" ml="5"></Box>
+					<Box maxH="70vh" className="img-con"></Box>
 				</Flex>
 
 				<Stack

@@ -57,7 +57,11 @@ const Cart = () => {
 					>
 						<Flex>
 							<Box width={["30%"]}>
-								<img w="100%" src={x.img} alt={x.name} />
+								<img
+									className="cart-product-img"
+									src={x.img}
+									alt={x.name}
+								/>
 							</Box>
 							<Stack
 								width={["70%"]}

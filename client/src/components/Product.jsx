@@ -10,10 +10,10 @@ const Product = ({ product }) => {
 				borderColor="gray.200"
 				className="product"
 			>
-				<div style={{ minHeight: "200px", width: "100%" }}>
+				<div>
 					<img src={product.imageUrl} alt={product.name} />
 				</div>
-				<Box px="3" pb="2">
+				<Box px="4" pb="4">
 					<Text
 						noOfLines={1}
 						textColor="gray.700"

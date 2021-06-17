@@ -38,7 +38,8 @@ body {
 	background-image: url(./assets/girl.jpg);
 	width: 60%;
 	height: 90vh;
-	background-position: center bottom;
+	background-size: cover;
+	background-position: center;
 }
 
 .copy {
@@ -47,14 +48,39 @@ body {
 
 @media screen and (max-width: 60em) {
 	.img-con {
-		display: none;
+		width: 100%;
+		height: 100vh;
+		margin-top: 3rem;
+		background-size: cover;
+		background-position: center bottom;
+	}
+	.product-img {
+		background-size: cover;
+		width: 100%;
+	}
+	.cart-product-img {
+		width: 100%;
+		object-fit: cover;
+		height: 80px;
 	}
 }
-
-.product-img {
-	background-size: cover;
-	background-position: top;
-	width: 100%;
+@media screen and (min-width: 60em) {
+	.product-img-container {
+		height: 80vh;
+		margin: auto;
+		overflow: hidden;
+	}
+	.product-img {
+		background-position: bottom;
+		margin: auto;
+		height: 100%;
+		transform: scale(1.25);
+	}
+	.cart-product-img {
+		width: 100%;
+		object-fit: cover;
+		height: 200px;
+	}
 }
 
 .cart-no {
@@ -80,14 +106,20 @@ nav {
 }
 
 button,
-.shoe-name,
-label {
+.shoe-name {
 	font-family: "Poppins", sans-serif !important;
 }
 
-.product:hover {
+.product:hover,
+.product:active,
+.product:focus {
 	transform: scale(1.05);
+	box-shadow: 0.9px 0.3px 10px #9e9da0;
 	transition: 0.25s ease-in-out;
+}
+
+.product {
+	transition: 0.5s ease-in-out;
 }
 
 nav a:hover {

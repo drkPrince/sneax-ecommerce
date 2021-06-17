@@ -8,7 +8,6 @@ import {
 	Button,
 	Text,
 	Select,
-	Image,
 	Badge,
 	FormLabel,
 	Stack,
@@ -70,10 +69,12 @@ const ProductDetails = () => {
 				flexDirection={["column", "column", "row"]}
 				alignItems="center"
 			>
-				<Box w={["100%", "100%", "50%"]} h="90vh">
-					<Image
-						boxSize="100%"
-						objectFit="cover"
+				<Box
+					w={["100%", "100%", "50%"]}
+					className="product-img-container"
+				>
+					<img
+						className="product-img"
 						src={productDetails?.imageUrl}
 						alt={productDetails?.name}
 					/>
@@ -121,10 +122,10 @@ const ProductDetails = () => {
 
 					{isInCart ? (
 						<Button
+							isFullWidth
 							colorScheme="cyan"
-							variant="link"
+							variant="outline"
 							mt="5"
-							size="lg"
 						>
 							<Link to="/cart">
 								<Flex alignItems="center">
