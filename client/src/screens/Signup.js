@@ -18,7 +18,8 @@ const Signup = () => {
 	const history = useHistory();
 
 	useEffect(() => {
-		if (user && !user?.signUpError && !user?.loginError) history.push("/");
+		if (user?.token && !user?.signUpError && !user?.loginError)
+			history.push("/");
 	}, [user, history]);
 
 	const signUpUser = (e) => {

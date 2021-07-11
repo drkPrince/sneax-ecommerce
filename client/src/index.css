@@ -124,8 +124,8 @@ button,
 
 nav a:hover {
 	text-decoration: underline;
-	transition: 2s ease-in;
-	color: purple !important;
+	letter-spacing: 0.1px;
+	transition: 0.4s ease-in;
 }
 
 .logout-btn:hover {

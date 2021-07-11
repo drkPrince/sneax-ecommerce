@@ -15,8 +15,6 @@ export const login = asyncHandler(async (req, res) => {
 		res.json({
 			id: theUser._id,
 			name: theUser.name,
-			password: theUser.password,
-			isAdmin: theUser.isAdmin,
 			token: generateToken(theUser._id),
 		});
 	} else {

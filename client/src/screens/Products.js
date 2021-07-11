@@ -12,6 +12,7 @@ import {
 	MenuList,
 	MenuItemOption,
 	MenuOptionGroup,
+	Spinner,
 } from "@chakra-ui/react";
 import Product from "../components/Product";
 
@@ -87,7 +88,7 @@ const Products = () => {
 							textColor="purple.900"
 							fontWeight="600"
 						>
-							Shop the best collection of sneakers. ever.
+							Shop the best collection of sneakers ever.
 						</Text>
 						<Text
 							textColor="gray.700"

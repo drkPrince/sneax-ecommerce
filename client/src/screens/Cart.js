@@ -23,13 +23,13 @@ const Cart = () => {
 	const fontSize2 = ["sm", "md", "md"];
 
 	function handleClick() {
-		if (user?.userInfo) history.push("/payment");
+		if (user?.token) history.push("/payment");
 		else history.push("/login");
 	}
 
 	if (cart.cartItems.length === 0) {
 		return (
-			<Box px="8" pt="16">
+			<Box px="8" pt="16" style={{ textAlign: "center" }}>
 				Cart is Empty
 			</Box>
 		);

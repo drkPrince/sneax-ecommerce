@@ -3,7 +3,7 @@ import axios from "axios";
 export const login = (credentials) => async (dispatch) => {
 	try {
 		const res = await axios.post("/api/user/login", { ...credentials });
-		dispatch({ type: "LOGIN_SUCCESS", payload: { userInfo: res.data } });
+		dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
 	} catch (e) {
 		dispatch({
 			type: "LOGIN_FAIL",

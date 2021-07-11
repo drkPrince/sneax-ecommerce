@@ -32,7 +32,7 @@ const Payment = () => {
 	const [showAddAddress, setShowAddAddress] = useState(false);
 
 	useEffect(() => {
-		if (!user?.userInfo) {
+		if (!user?.token) {
 			history.push("/login");
 		}
 	}, [user, history]);

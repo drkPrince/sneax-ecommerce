@@ -36,7 +36,7 @@ const Nav = () => {
 				fontSize={["xs", "sm", "md"]}
 				alignItems="center"
 			>
-				{user?.userInfo ? (
+				{user?.token ? (
 					<Stack
 						className="nav-item"
 						direction="row"
