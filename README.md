@@ -1,7 +1,7 @@
 
 # 👟 SneaxShop - A MERN e-commerce web app 
 
-An e-commerce web app made with **React, Redux, ChakraUI** for the frontend and **Node, Express, MongoDB** for the backend.
+An e-commerce web app made with **React, Redux, ChakraUI** for the frontend and **Node, Express, MongoDB** for the backend. It uses **Stripe** for payments.
 
 
 [Check out the website here.](http://sneaxshop.herokuapp.com/) If you like it, definitely 🌟 the repo, that'd make my day.
