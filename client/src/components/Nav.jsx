@@ -20,7 +20,7 @@ const Nav = () => {
 			as="nav"
 			alignItems="center"
 			px={[8, 12, 24]}
-			py={["8", "12"]}
+			py={["8", "12", "16"]}
 		>
 			<Flex
 				alignItems="flex-end"

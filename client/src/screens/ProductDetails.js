@@ -87,7 +87,7 @@ const ProductDetails = () => {
 					flexDirection="column"
 				>
 					<Text
-						fontSize={["2xl", "3xl", "4xl"]}
+						fontSize={["2xl", "3xl", "4xl", "5xl"]}
 						textColor="gray.700"
 						fontWeight="600"
 						lineHeight="1.2"
@@ -115,22 +115,22 @@ const ProductDetails = () => {
 						mb="5"
 						textColor="gray.700"
 						lineHeight="tall"
-						fontSize="md"
+						fontSize={["md", "xl"]}
 					>
 						{productDetails?.description}
 					</Text>
 
 					{isInCart ? (
-						<Button
-							isFullWidth
-							colorScheme="cyan"
-							variant="outline"
-							mt="5"
-						>
-							<Link to="/cart">
-								<Flex alignItems="center">
+						<Link to="/cart">
+							<Button
+								isFullWidth
+								colorScheme="cyan"
+								variant="outline"
+								mt="5"
+							>
+								<Flex alignItems="center" isFullWidth>
 									Go to cart
-									<Box ml="1">
+									<Box ml="1" isFullWidth>
 										<svg
 											fill="none"
 											width="1.2rem"
@@ -147,8 +147,8 @@ const ProductDetails = () => {
 										</svg>
 									</Box>
 								</Flex>
-							</Link>
-						</Button>
+							</Button>
+						</Link>
 					) : (
 						<Box mt="3">
 							<Stack spacing="2rem" direction="row">

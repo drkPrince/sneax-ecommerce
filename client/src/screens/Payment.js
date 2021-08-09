@@ -3,6 +3,7 @@ import { addAddress, createOrder } from "../store/actions/cartActions";
 import { useState, useEffect } from "react";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
+import { Dialog } from "@reach/dialog";
 import { useHistory } from "react-router-dom";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import {
@@ -20,6 +21,7 @@ import {
 import { calculateTotal } from "../utils";
 
 const Payment = () => {
+
 	const toast = useToast();
 	const history = useHistory();
 	const user = useSelector((state) => state.user);
@@ -78,6 +80,54 @@ const Payment = () => {
 	return (
 		<Box px={["8", "12", "28"]} py="10">
 			<div>
+			<Dialog isOpen={showAddAddress} onDismiss={() => setShowAddAddress(false)}>
+			<Box
+				my="8"
+				px="12"
+				py="5"
+			>
+				<Text fontSize="2xl">Add a new address</Text>
+				<form onSubmit={handleSubmit}>
+					<Stack spacing="12px" my="5">
+						<Input
+							name="address"
+							isRequired
+							type="text"
+							placeholder="Address (Street number, building number)"
+						/>
+						<Input
+							type="text"
+							isRequired
+							placeholder="City, District"
+							name="district"
+						/>
+						<Input
+							type="text"
+							isRequired
+							placeholder="Postal/PIN code"
+							name="postalCode"
+						/>
+						<Select
+							as={CountryDropdown}
+							value={country}
+							isRequired
+							onChange={(val) => setCountry(val)}
+						/>{" "}
+						/>
+						<Select
+							as={RegionDropdown}
+							isRequired
+							country={country}
+							value={region}
+							onChange={(val) => setRegion(val)}
+						/>
+					</Stack>
+					<Button colorScheme="blue" type="submit" mt="2">
+						Add address
+					</Button>
+				</form>
+			</Box>
+			</Dialog>
 				<Stack mt="5" spacing="10px">
 					<Box>
 						<FormLabel
@@ -110,62 +160,18 @@ const Payment = () => {
 					</Box>
 					<Box>
 						<Button
-							colorScheme={showAddAddress ? "red" : "cyan"}
-							variant={showAddAddress ? "outline" : "ghost"}
+							colorScheme="cyan"
+							variant="outline"
 							size="sm"
 							mt="2"
 							onClick={() => setShowAddAddress(!showAddAddress)}
 						>
-							{showAddAddress ? "Cancel" : "Add new address"}
+							Add new address
 						</Button>
 					</Box>
 				</Stack>
 			</div>
-			<Box
-				my="8"
-				style={{ display: showAddAddress ? "block" : "none" }}
-				px="12"
-				py="5"
-				border="1px"
-				borderColor="gray.200"
-				borderRadius="6px"
-			>
-				<Text fontSize="2xl">Add a new address</Text>
-				<form onSubmit={handleSubmit}>
-					<Stack spacing="12px" my="5">
-						<Input
-							name="address"
-							type="text"
-							placeholder="Address (Street number, building number)"
-						/>
-						<Input
-							type="text"
-							placeholder="City, District"
-							name="district"
-						/>
-						<Input
-							type="text"
-							placeholder="Postal/PIN code"
-							name="postalCode"
-						/>
-						<Select
-							as={CountryDropdown}
-							value={country}
-							onChange={(val) => setCountry(val)}
-						/>{" "}
-						/>
-						<Select
-							as={RegionDropdown}
-							country={country}
-							value={region}
-							onChange={(val) => setRegion(val)}
-						/>
-					</Stack>
-					<Button colorScheme="blue" type="submit" mt="2">
-						Add address
-					</Button>
-				</form>
-			</Box>
+			
 			<Box mt="12">
 				<FormLabel
 					htmlFor="payment-method"

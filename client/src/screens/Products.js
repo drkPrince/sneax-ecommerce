@@ -12,7 +12,6 @@ import {
 	MenuList,
 	MenuItemOption,
 	MenuOptionGroup,
-	Spinner,
 } from "@chakra-ui/react";
 import Product from "../components/Product";
 
@@ -82,7 +81,7 @@ const Products = () => {
 					<Box pr="2">
 						<Text
 							className="copy"
-							fontSize={["3xl", "4xl", "5xl"]}
+							fontSize={["3xl", "4xl", "5xl", "6xl"]}
 							lineHeight="1"
 							mt={["2", "6", "12"]}
 							textColor="purple.900"
@@ -93,12 +92,12 @@ const Products = () => {
 						<Text
 							textColor="gray.700"
 							mt="4"
-							fontSize={["md", "lg", "xl"]}
-							lineHeight={[1.5, 2, 8]}
+							fontSize={["md", "lg", "xl", "2xl"]}
+							lineHeight={[1.5, 2, 8, 9]}
 						>
 							Free shipping on your first order. Beautifully
-							crafted collection. Lowest prices guaranteed. No
-							questions asked returns.
+							crafted collection. No
+							questions asked returns. And the best part, <a target='_blank' rel='noreferrer' href="http://github.com/drkPrince/sneax-ecommerce"><Text textDecoration='underline' display='inline' textColor="purple.800">its open source.</Text></a>
 						</Text>
 						<Button mt="4" colorScheme="purple">
 							<a href="#main">Shop Now</a>

@@ -1,9 +1,7 @@
 import Order from "../models/orderModel.js";
 import Stripe from "stripe";
 
-const stripe = new Stripe(
-	"sk_test_51IxqlgSFv3T0wJaK19OU5hneuSXI5hZw83YJvE2SZVf1nyPWpohNRU52H7alUW0AN2Ek14lmvtWGmSQYCyrLh9wC009d9D1Xo2"
-);
+const stripe = new Stripe(process.env.STRIPE_KEY);
 
 export const createCheckoutSession = async (req, res) => {
 	const session = await stripe.checkout.sessions.create({

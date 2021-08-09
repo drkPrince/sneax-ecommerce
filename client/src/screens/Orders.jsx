@@ -7,7 +7,7 @@ import { Flex, Box, Text, Stack, StackDivider } from "@chakra-ui/react";
 const Orders = () => {
 	const history = useHistory();
 	const user = useSelector((state) => state.user);
-	const [orders, setOrders] = useState([]);
+	const [orders, setOrders] = useState(null);
 
 	useEffect(() => {
 		if (!user?.token) {
@@ -27,7 +27,8 @@ const Orders = () => {
 			<Text textColor="gray.600" fontSize="3xl" mb="6">
 				Your Orders
 			</Text>
-			{orders.length === 0 ? (
+			
+			{orders && orders.length === 0 ? (
 				<p style={{ textAlign: "center" }}>
 					You don't have any orders.
 				</p>
@@ -36,7 +37,7 @@ const Orders = () => {
 					divider={<StackDivider borderColor="gray.200" />}
 					spacing="3rem"
 				>
-					{orders.map((x) => (
+					{orders && orders.map((x) => (
 						<Flex
 							key={x._id}
 							mb={["2", "4"]}
